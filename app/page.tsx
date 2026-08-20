@@ -1,10 +1,56 @@
 import Link from "next/link";
-import ArticleCard from "@/components/ArticleCard";
-import { getFeaturedArticles } from "@/lib/articles";
+import Image from "next/image";
+
+const pillLinks = [
+  { href: "/articles", label: "Articles", color: "#FF6900" },
+  { href: "/map", label: "Map", color: "#2F6778" },
+  { href: "/gallery", label: "Gallery", color: "#191D32" },
+  { href: "/crew", label: "Us", color: "#15687A" },
+];
+
+const carouselLogos = [
+  { src: "/logos/ash-creative.png", alt: "ASH Creative" },
+  { src: "/logos/legasea.png", alt: "LegaSea" },
+  { src: "/logos/red-earth.png", alt: "Red Earth" },
+  { src: "/logos/deep-dive-dubai.png", alt: "Deep Dive Dubai" },
+];
+
+const socialButtons = [
+  {
+    href: "https://www.facebook.com/profile.php?id=61575993140919",
+    label: "Facebook",
+    color: "#1877F2",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
+        <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.15 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.89h2.78l-.44 2.91h-2.34V22c4.78-.79 8.44-4.94 8.44-9.94Z" />
+      </svg>
+    ),
+  },
+  {
+    href: "https://www.instagram.com/BamBamDiving",
+    label: "Instagram",
+    color: "#C13584",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-7 h-7">
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+  },
+  {
+    href: "https://www.youtube.com/@BamBamDiving",
+    label: "YouTube",
+    color: "#DC2626",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
+        <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.5V8.5L15.8 12l-6.2 3.5Z" />
+      </svg>
+    ),
+  },
+];
 
 export default function Home() {
-  const featured = getFeaturedArticles();
-
   return (
     <div>
       {/* Hero */}
@@ -20,9 +66,6 @@ export default function Home() {
           <div className="absolute inset-0 bg-navy/20" />
         </div>
         <div className="relative mx-auto max-w-6xl px-5 sm:px-8 pt-24 pb-28 sm:pt-32 sm:pb-36 text-center">
-          <p className="font-gauge text-white/80 text-xs tracking-[0.2em] uppercase mb-5 [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
-            Real dives. Real footage. Real stories.
-          </p>
           <h1 className="font-display italic text-5xl sm:text-6xl md:text-7xl leading-[1.05] text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
             The World&rsquo;s Best
             <br />
@@ -34,42 +77,52 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Articles */}
+      {/* Section pills */}
       <section className="mx-auto max-w-6xl px-5 sm:px-8 py-16 sm:py-20">
-        <div className="flex items-end justify-between mb-8 gap-4 flex-wrap">
-          <h2 className="font-display text-2xl sm:text-3xl text-ink">
-            Featured Articles
-          </h2>
-          <Link
-            href="/articles"
-            className="font-body text-sm font-medium text-teal hover:text-buoy transition-colors"
-          >
-            Show All &rarr;
-          </Link>
-        </div>
-        <div className="grid sm:grid-cols-2 gap-6">
-          {featured.map((article, i) => (
-            <ArticleCard key={article.slug} article={article} index={i} />
+        <div className="flex flex-wrap justify-center gap-5">
+          {pillLinks.map((pill) => (
+            <Link
+              key={pill.href}
+              href={pill.href}
+              className="font-display text-xl sm:text-2xl text-white px-10 py-5 rounded-full transition-transform hover:scale-105"
+              style={{ backgroundColor: pill.color }}
+            >
+              {pill.label}
+            </Link>
           ))}
         </div>
       </section>
 
-      {/* Gallery teaser */}
-      <section className="border-t border-line bg-paper-dim">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8 py-16 sm:py-20 text-center">
-          <h2 className="font-display text-2xl sm:text-3xl text-ink mb-3">
-            From the Gallery
-          </h2>
-          <p className="text-ink-dim max-w-xl mx-auto mb-8">
-            A running log of shots from the last few dives &mdash; curated straight from the source,
-            no broken feed required.
-          </p>
-          <Link
-            href="/gallery"
-            className="font-body text-sm font-medium bg-buoy hover:bg-buoy-dim text-white px-6 py-3 rounded-full transition-colors inline-block"
-          >
-            Open Gallery
-          </Link>
+      {/* Logo carousel */}
+      <section className="border-t border-line bg-paper-dim py-14 overflow-hidden">
+        <div className="flex w-max animate-marquee">
+          {[...carouselLogos, ...carouselLogos].map((logo, i) => (
+            <div
+              key={`${logo.alt}-${i}`}
+              className="relative w-40 h-20 mx-10 shrink-0 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all"
+            >
+              <Image src={logo.src} alt={logo.alt} fill className="object-contain" />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Social buttons */}
+      <section className="mx-auto max-w-6xl px-5 sm:px-8 py-16 sm:py-20">
+        <div className="flex flex-wrap justify-center gap-6">
+          {socialButtons.map((social) => (
+            <a
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+              className="flex items-center justify-center w-20 h-20 rounded-full text-white transition-transform hover:scale-110"
+              style={{ backgroundColor: social.color }}
+            >
+              {social.icon}
+            </a>
+          ))}
         </div>
       </section>
     </div>
