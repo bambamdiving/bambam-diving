@@ -15,7 +15,10 @@ export default function WorldMap({ pins }: { pins: MapPin[] }) {
   const [active, setActive] = useState<string | null>(null);
 
   return (
-    <div className="relative aspect-[1774/887] w-full rounded-xl overflow-hidden border border-line">
+    <div
+      className="relative aspect-[1774/887] w-full rounded-xl overflow-hidden border border-line"
+      onClick={() => setActive(null)}
+    >
       <Image src="/map/world-map.png" alt="World map" fill className="object-cover" priority />
 
       {pins.map((pin) => (
@@ -27,7 +30,10 @@ export default function WorldMap({ pins }: { pins: MapPin[] }) {
           onMouseLeave={() => setActive((cur) => (cur === pin.country ? null : cur))}
         >
           <button
-            onClick={() => setActive((cur) => (cur === pin.country ? null : pin.country))}
+            onClick={(e) => {
+              e.stopPropagation();
+              setActive(pin.country);
+            }}
             aria-label={`Articles in ${pin.country}`}
             className="relative flex items-center justify-center w-5 h-5 rounded-full bg-buoy border-2 border-white shadow-lg"
           >
@@ -35,7 +41,10 @@ export default function WorldMap({ pins }: { pins: MapPin[] }) {
           </button>
 
           {active === pin.country && (
-            <div className="absolute z-10 top-6 left-1/2 -translate-x-1/2 w-56 bg-white rounded-lg shadow-xl border border-line p-4 text-left">
+            <div
+              className="absolute z-10 top-6 left-1/2 -translate-x-1/2 w-56 bg-white rounded-lg shadow-xl border border-line p-4 text-left"
+              onClick={(e) => e.stopPropagation()}
+            >
               <p className="font-gauge text-[10px] tracking-[0.15em] uppercase text-buoy mb-2">
                 {pin.country}
               </p>
