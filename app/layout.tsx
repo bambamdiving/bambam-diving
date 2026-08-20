@@ -1,0 +1,47 @@
+import type { Metadata } from "next";
+import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Analytics from "@/components/Analytics";
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+});
+
+export const metadata: Metadata = {
+  title: "BamBam Diving | Real Stories From Underwater",
+  description:
+    "Dive stories, dive sites, and the odd shark encounter, logged from around the world by BamBam Diving.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="en">
+      <body
+        className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable} antialiased`}
+      >
+        <Analytics />
+        <Header />
+        <main>{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}

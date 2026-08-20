@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+:root {
+  --color-paper: #fbfcfa;
+  --color-paper-dim: #f0f4f2;
+  --color-panel: #eef3f1;
+  --color-ink: #0e2a32;
+  --color-ink-dim: #56706c;
+  --color-teal: #1f6f68;
+  --color-teal-deep: #12403c;
+  --color-line: #d8e3df;
+  --color-buoy: #ff5a2e;
+  --color-buoy-dim: #e3491f;
+}
+
+@theme inline {
+  --color-paper: var(--color-paper);
+  --color-paper-dim: var(--color-paper-dim);
+  --color-panel: var(--color-panel);
+  --color-ink: var(--color-ink);
+  --color-ink-dim: var(--color-ink-dim);
+  --color-teal: var(--color-teal);
+  --color-teal-deep: var(--color-teal-deep);
+  --color-line: var(--color-line);
+  --color-buoy: var(--color-buoy);
+  --color-buoy-dim: var(--color-buoy-dim);
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-inter);
+  --font-gauge: var(--font-jetbrains);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body), -apple-system, sans-serif;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-buoy);
+  outline-offset: 2px;
+}
+
+@keyframes drift {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+.drift { animation: drift 6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .drift { animation: none; }
+}
