@@ -2,7 +2,8 @@
 title: "Diving Nusa Lembongan"
 excerpt: "Island paradise located just South East of Bali, and right next to its big brother, Nusa Penida. The diving is great too."
 categories: ["Indonesia", "Scuba Diving", "Sunfish", "Turtles"]
-tags: ["Sunfish", "Turtles"]
+tags: ["Sunfish", "Turtles", "Manta Rays", "Indonesia"]
+contributor: "Adam Hart"
 location: "Nusa Lembongan, Indonesia"
 depth: "TBD"
 diveTime: "TBD"

@@ -26,6 +26,8 @@ export type ArticleMeta = {
 
 export type Article = ArticleMeta & { content: string };
 
+export type SearchableArticle = ArticleMeta & { content: string };
+
 export function getAllSlugs(): string[] {
   if (!fs.existsSync(articlesDirectory)) return [];
   return fs
@@ -52,6 +54,12 @@ function getArticleMetaBySlug(slug: string): ArticleMeta {
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data } = matter(fileContents);
   return { ...(data as Omit<ArticleMeta, "slug">), slug };
+}
+
+export function getAllArticlesWithContent(): SearchableArticle[] {
+  return getAllSlugs()
+    .map((slug) => getArticleBySlug(slug))
+    .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
 export function getFeaturedArticles(): ArticleMeta[] {

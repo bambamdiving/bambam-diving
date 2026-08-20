@@ -1,5 +1,7 @@
+import { Suspense } from "react";
+import Image from "next/image";
 import ArticleFilters from "@/components/ArticleFilters";
-import { getAllArticles } from "@/lib/articles";
+import { getAllArticlesWithContent } from "@/lib/articles";
 
 export const metadata = {
   title: "Articles | BamBam Diving",
@@ -7,20 +9,26 @@ export const metadata = {
 };
 
 export default function ArticlesPage() {
-  const articles = getAllArticles();
+  const articles = getAllArticlesWithContent();
 
   return (
-    <div className="mx-auto max-w-6xl px-5 sm:px-8 py-16 sm:py-20">
-      <p className="font-gauge text-buoy text-xs tracking-[0.2em] uppercase mb-3">
-        The Log
-      </p>
-      <h1 className="font-display text-4xl sm:text-5xl text-ink mb-4">
-        Articles
-      </h1>
-      <p className="text-ink-dim max-w-xl mb-12">
-        Explore the best spots, from local reefs to faraway oceans.
-      </p>
-      <ArticleFilters articles={articles} />
+    <div>
+      <div className="relative h-56 sm:h-72 w-full overflow-hidden">
+        <Image
+          src="/articles-bg.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-navy/40" />
+      </div>
+
+      <div className="mx-auto max-w-6xl px-5 sm:px-8 py-12 sm:py-16">
+        <Suspense fallback={null}>
+          <ArticleFilters articles={articles} />
+        </Suspense>
+      </div>
     </div>
   );
 }

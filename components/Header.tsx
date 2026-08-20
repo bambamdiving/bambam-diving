@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -45,6 +48,8 @@ const socialLinks = [
 ];
 
 export default function Header() {
+  const pathname = usePathname();
+
   return (
     <header className="sticky top-0 z-50 bg-navy border-b-4 border-buoy">
       <div className="mx-auto max-w-6xl px-5 sm:px-8 py-4 flex items-center justify-between gap-4">
@@ -78,23 +83,37 @@ export default function Header() {
         </div>
       </div>
 
-      <nav className="hidden md:flex items-center justify-center gap-8 font-body text-sm text-navy-dim border-t border-white/10 px-5 sm:px-8 py-3">
-        {navLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="hover:text-buoy transition-colors"
-          >
-            {link.label}
-          </Link>
-        ))}
+      <nav className="hidden md:flex items-center justify-center gap-3 font-body text-base text-navy-dim border-t border-white/10 px-5 sm:px-8 py-3">
+        {navLinks.map((link) => {
+          const active = pathname === link.href;
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`px-4 py-1.5 rounded-full transition-colors ${
+                active ? "bg-buoy text-white" : "hover:text-buoy"
+              }`}
+            >
+              {link.label}
+            </Link>
+          );
+        })}
       </nav>
-      <nav className="md:hidden flex items-center gap-5 overflow-x-auto px-5 pb-3 font-body text-sm text-navy-dim border-t border-white/10 pt-3">
-        {navLinks.map((link) => (
-          <Link key={link.href} href={link.href} className="hover:text-buoy whitespace-nowrap">
-            {link.label}
-          </Link>
-        ))}
+      <nav className="md:hidden flex items-center gap-3 overflow-x-auto px-5 pb-3 font-body text-base text-navy-dim border-t border-white/10 pt-3">
+        {navLinks.map((link) => {
+          const active = pathname === link.href;
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`px-4 py-1.5 rounded-full whitespace-nowrap transition-colors ${
+                active ? "bg-buoy text-white" : "hover:text-buoy"
+              }`}
+            >
+              {link.label}
+            </Link>
+          );
+        })}
       </nav>
     </header>
   );
