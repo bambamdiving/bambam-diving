@@ -61,29 +61,20 @@ export default function Header() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-3">
-          <div className="hidden sm:flex items-center gap-2">
-            {socialLinks.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                className="flex items-center justify-center w-8 h-8 rounded-full text-white transition-opacity hover:opacity-85"
-                style={{ backgroundColor: social.color }}
-              >
-                {social.icon}
-              </a>
-            ))}
-          </div>
-
-          <Link
-            href="/become-a-contributor"
-            className="shrink-0 font-body text-sm font-medium bg-teal hover:bg-teal-deep text-white px-4 py-2.5 rounded-full transition-colors"
-          >
-            Get Published
-          </Link>
+        <div className="hidden sm:flex items-center gap-2">
+          {socialLinks.map((social) => (
+            <a
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+              className="flex items-center justify-center w-8 h-8 rounded-full text-white transition-opacity hover:opacity-85"
+              style={{ backgroundColor: social.color }}
+            >
+              {social.icon}
+            </a>
+          ))}
         </div>
       </div>
 

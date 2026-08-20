@@ -2,6 +2,7 @@
 title: "Cenotes Cave Diving in Mexico"
 excerpt: "There are oceans in many parts of the world. But cenotes — these beautiful and extensive freshwater caves — exist only in Mexico."
 categories: ["Cave Diving", "Mexico", "Scuba Diving"]
+tags: ["Cave Diving"]
 location: "Yucatán Peninsula, Mexico"
 depth: "TBD"
 diveTime: "TBD"

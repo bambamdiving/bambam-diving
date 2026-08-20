@@ -11,6 +11,8 @@ export type ArticleMeta = {
   title: string;
   excerpt: string;
   categories: string[];
+  tags?: string[];
+  contributor?: string;
   location: string;
   depth: string;
   diveTime: string;

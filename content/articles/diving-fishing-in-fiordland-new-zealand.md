@@ -2,6 +2,7 @@
 title: "Diving & Fishing in Fiordland, New Zealand"
 excerpt: "When my dad asked me to join him and his mates on a bucket-list trip to Fiordland, I didn't hesitate. Nothing prepared me for how untouched and magical it truly is."
 categories: ["Cray Diving", "New Zealand", "Scuba Diving", "Sharks"]
+tags: ["Crayfish", "Sharks"]
 location: "Fiordland, South Island, New Zealand"
 depth: "TBD"
 diveTime: "TBD"

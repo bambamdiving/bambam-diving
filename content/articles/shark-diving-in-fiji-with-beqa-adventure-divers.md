@@ -2,6 +2,7 @@
 title: "Shark Diving in Fiji"
 excerpt: "On a recent trip, I had the chance to tick off one of the big ones on my diving list: shark diving in Fiji with Beqa Adventure Divers."
 categories: ["Fiji", "Scuba Diving", "Sharks"]
+tags: ["Sharks"]
 location: "Beqa Lagoon, Fiji"
 depth: "TBD"
 diveTime: "TBD"

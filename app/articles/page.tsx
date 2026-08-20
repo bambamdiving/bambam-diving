@@ -1,4 +1,4 @@
-import ArticleCard from "@/components/ArticleCard";
+import ArticleFilters from "@/components/ArticleFilters";
 import { getAllArticles } from "@/lib/articles";
 
 export const metadata = {
@@ -20,11 +20,7 @@ export default function ArticlesPage() {
       <p className="text-ink-dim max-w-xl mb-12">
         Explore the best spots, from local reefs to faraway oceans.
       </p>
-      <div className="grid sm:grid-cols-2 gap-6">
-        {articles.map((article, i) => (
-          <ArticleCard key={article.slug} article={article} index={i} />
-        ))}
-      </div>
+      <ArticleFilters articles={articles} />
     </div>
   );
 }
