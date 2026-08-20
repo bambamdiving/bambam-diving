@@ -5,9 +5,9 @@ type Props = {
 };
 
 const tones = {
-  teal: ["#1F6F68", "#0E2A32"],
-  deep: ["#12403C", "#0A1A20"],
-  sand: ["#2D8C82", "#12403C"],
+  teal: ["#2F6778", "#191D32"],
+  deep: ["#15687A", "#131627"],
+  sand: ["#2FA7AD", "#15687A"],
 };
 
 export default function UnderwaterPanel({
