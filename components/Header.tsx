@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const navLinks = [
@@ -47,11 +48,17 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-paper/90 backdrop-blur border-b border-line">
       <div className="mx-auto max-w-6xl px-5 sm:px-8 py-4 flex items-center justify-between gap-4">
-        <Link
-          href="/"
-          className="font-display font-semibold text-xl sm:text-2xl text-ink"
-        >
-          BamBam <span className="text-buoy italic">Diving</span>
+        <Link href="/" className="flex items-center gap-3 shrink-0">
+          <Image
+            src="/logo.png"
+            alt="BamBam Diving"
+            width={40}
+            height={40}
+            className="rounded-lg"
+          />
+          <span className="font-display font-semibold text-xl sm:text-2xl text-ink">
+            BamBam <span className="text-buoy italic">Diving</span>
+          </span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 font-body text-sm text-ink-dim">
