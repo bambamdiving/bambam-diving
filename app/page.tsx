@@ -17,18 +17,18 @@ export default function Home() {
             allow="autoplay; encrypted-media"
             frameBorder={0}
           />
-          <div className="absolute inset-0 bg-navy/60" />
+          <div className="absolute inset-0 bg-navy/20" />
         </div>
         <div className="relative mx-auto max-w-6xl px-5 sm:px-8 pt-24 pb-28 sm:pt-32 sm:pb-36 text-center">
-          <p className="font-gauge text-white/80 text-xs tracking-[0.2em] uppercase mb-5">
+          <p className="font-gauge text-white/80 text-xs tracking-[0.2em] uppercase mb-5 [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
             Real dives. Real footage. Real stories.
           </p>
-          <h1 className="font-display italic text-5xl sm:text-6xl md:text-7xl leading-[1.05] text-white">
+          <h1 className="font-display italic text-5xl sm:text-6xl md:text-7xl leading-[1.05] text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
             The World&rsquo;s Best
             <br />
             <span className="text-buoy">Dive Site</span>
           </h1>
-          <p className="mt-4 font-body text-white/70">
+          <p className="mt-4 font-body text-white/70 [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
             *probably not the world&rsquo;s best dive site
           </p>
         </div>
