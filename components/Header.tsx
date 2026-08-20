@@ -6,7 +6,7 @@ const navLinks = [
   { href: "/articles", label: "Articles" },
   { href: "/map", label: "Map" },
   { href: "/gallery", label: "Gallery" },
-  { href: "/crew", label: "The Crew" },
+  { href: "/crew", label: "Us" },
 ];
 
 const socialLinks = [

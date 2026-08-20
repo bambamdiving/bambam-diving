@@ -1,15 +1,30 @@
-import UnderwaterPanel from "@/components/UnderwaterPanel";
+import CrewGrid from "@/components/CrewGrid";
 
 export const metadata = {
-  title: "The Crew | BamBam Diving",
+  title: "Us | BamBam Diving",
   description: "The people behind BamBam Diving.",
 };
 
 const crew = [
   {
-    name: "Add your name here",
-    role: "Founder / Diver",
-    bio: "Tell me a bit about yourself and I'll write this bio properly \u2014 or send me your own words and I'll drop them straight in.",
+    name: "Adam Hart",
+    role: "",
+    bio: "Adam is happiest when exploring the world beneath the waves. He started scuba diving at just 12 years old and has spent much of his life chasing new underwater experiences. From reef systems to wrecks, Adam’s curiosity and respect for the ocean drive him to share its beauty with others.",
+  },
+  {
+    name: "Youssef Sammour",
+    role: "",
+    bio: "Youssef combines his love of freediving with a strong dedication to humanitarian causes. His connection to the ocean is about more than adventure, it reflects his belief in balance, resilience, and community. Whether in the water or working on projects that create positive change, Youssef brings passion and purpose to everything he does.",
+  },
+  {
+    name: "Camilo Garcia",
+    role: "Owner of Divers Underground",
+    bio: "Where others see a map, he sees a portal to another world. Camilo lives to discover what lies beyond the known path, whether it’s a trail through the jungle, a passage underground, or a new adventure waiting to unfold. Warm, curious, and full of humour, he’s the kind of person who makes every day feel like the beginning of something exciting.",
+  },
+  {
+    name: "Scott Macindoe",
+    role: "President NZ Sport Fishing Council, LegaSea Support",
+    bio: "Scott Macindoe’s passion is to make certain that the vision of ‘more fish in the water for future generations’ is not something that we just talk about – he is totally committed to this becoming our reality.",
   },
 ];
 
@@ -20,26 +35,13 @@ export default function CrewPage() {
         Who&rsquo;s Behind This
       </p>
       <h1 className="font-display text-4xl sm:text-5xl text-ink mb-4">
-        The Crew
+        Us
       </h1>
       <p className="text-ink-dim max-w-xl mb-12">
-        The divers, photographers, and mates who make the trips happen.
+        The divers, photographers, and mates who make the trips happen. Tap a name for their story.
       </p>
 
-      <div className="grid sm:grid-cols-2 gap-6">
-        {crew.map((member) => (
-          <div key={member.name} className="border border-line rounded-xl bg-white shadow-sm overflow-hidden">
-            <UnderwaterPanel className="h-28 w-full" tone="sand" />
-            <div className="p-6">
-              <h3 className="font-display text-xl text-ink">{member.name}</h3>
-              <p className="font-gauge text-[11px] tracking-[0.15em] uppercase text-buoy mt-1 mb-3">
-                {member.role}
-              </p>
-              <p className="text-ink-dim text-sm leading-relaxed">{member.bio}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+      <CrewGrid crew={crew} />
     </div>
   );
 }
