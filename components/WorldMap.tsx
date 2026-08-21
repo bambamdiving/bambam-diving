@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import TagPills from "./TagPills";
@@ -18,8 +17,15 @@ export type MapPin = {
   }[];
 };
 
-export default function WorldMap({ pins }: { pins: MapPin[] }) {
-  const [active, setActive] = useState<string | null>(null);
+export default function WorldMap({
+  pins,
+  active,
+  onActiveChange,
+}: {
+  pins: MapPin[];
+  active: string | null;
+  onActiveChange: (country: string | null) => void;
+}) {
   const activePin = pins.find((p) => p.country === active);
 
   return (
@@ -30,7 +36,7 @@ export default function WorldMap({ pins }: { pins: MapPin[] }) {
         {pins.map((pin) => (
           <button
             key={pin.country}
-            onClick={() => setActive(pin.country)}
+            onClick={() => onActiveChange(pin.country)}
             aria-label={`Articles in ${pin.country}`}
             className="absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-5 h-5 rounded-full bg-buoy border-2 border-white shadow-lg hover:scale-125 transition-transform"
             style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
@@ -43,14 +49,14 @@ export default function WorldMap({ pins }: { pins: MapPin[] }) {
       {activePin && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-navy/70 px-5"
-          onClick={() => setActive(null)}
+          onClick={() => onActiveChange(null)}
         >
           <div
             className="bg-white rounded-xl max-w-md w-full p-8 relative"
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              onClick={() => setActive(null)}
+              onClick={() => onActiveChange(null)}
               aria-label="Close"
               className="absolute top-4 right-4 text-ink-dim hover:text-buoy transition-colors"
             >
