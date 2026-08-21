@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -5,9 +6,13 @@ export default function Footer() {
     <footer className="bg-navy-deep mt-24">
       <div className="mx-auto max-w-6xl px-5 sm:px-8 py-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div>
-          <p className="font-display text-lg text-white">
-            BamBam <span className="text-buoy italic">Diving</span>
-          </p>
+          <Image
+            src="/logo.png"
+            alt="BamBam Diving"
+            width={280}
+            height={112}
+            className="h-10 w-auto brightness-0 invert"
+          />
           <p className="font-body text-sm text-navy-dim mt-2">
             &copy; {new Date().getFullYear()} BamBam Diving. All rights reserved.
           </p>

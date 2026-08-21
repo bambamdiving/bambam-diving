@@ -11,6 +11,7 @@ diveTime: "TBD"
 waterTemp: "TBD"
 visibility: "TBD"
 date: "2026-04-18"
+youtubeId: "iS2TtlTE4Lk"
 featured: true
 ---
 On a recent trip, I had the chance to tick off one of the big ones on my diving list: shark diving in Fiji with Beqa Adventure Divers.

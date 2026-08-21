@@ -1,6 +1,10 @@
 import WorldMap, { type MapPin } from "@/components/WorldMap";
+import TagPills from "@/components/TagPills";
 import { getAllArticles } from "@/lib/articles";
 import { findContributor } from "@/lib/contributors";
+
+// Dubai is an emirate, not a country, so it's excluded from the country tag list.
+const NON_COUNTRY_PINS = ["Dubai"];
 
 export const metadata = {
   title: "Map | BamBam Diving",
@@ -50,6 +54,15 @@ export default function MapPage() {
         Glowing pins mark countries we&rsquo;ve got dive stories from &mdash; tap one to
         see the articles. Everywhere else is still uncharted.
       </p>
+
+      <div className="mb-6">
+        <TagPills
+          tags={pins
+            .map((pin) => pin.country)
+            .filter((country) => !NON_COUNTRY_PINS.includes(country))}
+          size="md"
+        />
+      </div>
 
       <WorldMap pins={pins} />
 
