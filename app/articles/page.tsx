@@ -21,7 +21,7 @@ export default function ArticlesPage() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-navy/60" />
+        <div className="absolute inset-0 bg-navy/25" />
       </div>
 
       <div className="mx-auto max-w-6xl px-5 sm:px-8 py-12 sm:py-16">

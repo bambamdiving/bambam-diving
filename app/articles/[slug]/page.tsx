@@ -1,10 +1,12 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import {
   getAllSlugs,
   getArticleBySlug,
   markdownToHtml,
 } from "@/lib/articles";
+import { crew } from "@/lib/crew";
 import DiveLog from "@/components/DiveLog";
 import UnderwaterPanel from "@/components/UnderwaterPanel";
 
@@ -44,6 +46,7 @@ export default async function ArticlePage({
   }
 
   const contentHtml = await markdownToHtml(article.content);
+  const contributor = crew.find((c) => c.name === article.contributor);
 
   return (
     <article>
@@ -87,6 +90,23 @@ export default async function ArticlePage({
           className="mt-10 font-body text-lg leading-relaxed text-ink-dim [&_h2]:font-display [&_h2]:text-ink [&_h2]:text-2xl [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:mb-5 [&_em]:text-ink-dim"
           dangerouslySetInnerHTML={{ __html: contentHtml }}
         />
+
+        {contributor && (
+          <div className="mt-14 pt-8 border-t border-line flex items-start gap-4">
+            <span className="relative w-16 h-16 rounded-full overflow-hidden shrink-0 bg-teal">
+              {contributor.photo && (
+                <Image src={contributor.photo} alt={contributor.name} fill className="object-cover" />
+              )}
+            </span>
+            <div>
+              <p className="font-gauge text-[10px] tracking-[0.15em] uppercase text-buoy mb-1">
+                Written by
+              </p>
+              <p className="font-display text-lg text-ink">{contributor.name}</p>
+              <p className="text-ink-dim text-sm leading-relaxed mt-1">{contributor.bio}</p>
+            </div>
+          </div>
+        )}
       </div>
     </article>
   );

@@ -52,19 +52,33 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 bg-navy border-b-4 border-buoy">
-      <div className="mx-auto max-w-6xl px-5 sm:px-8 py-4 flex items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-3 shrink-0">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8 py-3 flex items-center justify-between gap-4">
+        <Link href="/" className="shrink-0">
           <Image
             src="/logo.png"
             alt="BamBam Diving"
-            width={40}
-            height={40}
+            width={64}
+            height={64}
             className="rounded-lg"
           />
-          <span className="font-display font-semibold text-xl sm:text-2xl text-white">
-            BamBam <span className="text-buoy italic">Diving</span>
-          </span>
         </Link>
+
+        <nav className="hidden md:flex items-center gap-2 font-body text-base text-navy-dim">
+          {navLinks.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`px-4 py-1.5 rounded-full transition-colors ${
+                  active ? "bg-buoy text-white" : "hover:text-buoy"
+                }`}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
 
         <div className="hidden sm:flex items-center gap-2">
           {socialLinks.map((social) => (
@@ -83,22 +97,6 @@ export default function Header() {
         </div>
       </div>
 
-      <nav className="hidden md:flex items-center justify-center gap-3 font-body text-base text-navy-dim border-t border-white/10 px-5 sm:px-8 py-3">
-        {navLinks.map((link) => {
-          const active = pathname === link.href;
-          return (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`px-4 py-1.5 rounded-full transition-colors ${
-                active ? "bg-buoy text-white" : "hover:text-buoy"
-              }`}
-            >
-              {link.label}
-            </Link>
-          );
-        })}
-      </nav>
       <nav className="md:hidden flex items-center justify-between gap-1 px-2 pb-3 font-body text-[11px] text-navy-dim border-t border-white/10 pt-3">
         {navLinks.map((link) => {
           const active = pathname === link.href;

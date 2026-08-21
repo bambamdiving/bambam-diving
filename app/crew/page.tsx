@@ -19,23 +19,25 @@ export default function CrewPage() {
   }));
 
   return (
-    <div className="mx-auto max-w-6xl px-5 sm:px-8 py-16 sm:py-20">
-      <div className="bg-panel rounded-xl p-8 text-center mb-16">
-        <h2 className="font-display text-2xl sm:text-3xl text-ink mb-3">
-          Got a Story to Add?
-        </h2>
-        <p className="text-ink-dim max-w-xl mx-auto mb-6">
-          If you&rsquo;ve got a dive worth writing up, we&rsquo;d love to have you join the crew.
-        </p>
+    <div className="mx-auto max-w-6xl px-5 sm:px-8 pt-8 sm:pt-10 pb-16 sm:pb-20">
+      <div className="bg-panel rounded-xl p-5 flex flex-wrap items-center justify-between gap-4 mb-10">
+        <div>
+          <h2 className="font-display text-xl text-ink">
+            Got a Story to Add?
+          </h2>
+          <p className="text-ink-dim text-sm">
+            We&rsquo;d love to have you join the crew.
+          </p>
+        </div>
         <Link
           href="/become-a-contributor"
-          className="font-body text-sm font-medium bg-teal hover:bg-teal-deep text-white px-6 py-3 rounded-full transition-colors inline-block"
+          className="shrink-0 font-body text-sm font-medium bg-teal hover:bg-teal-deep text-white px-6 py-3 rounded-full transition-colors"
         >
           Get Published
         </Link>
       </div>
 
-      <h1 className="font-display text-4xl sm:text-5xl text-ink mb-12">
+      <h1 className="font-display text-4xl sm:text-5xl text-ink mb-8">
         Us
       </h1>
 
