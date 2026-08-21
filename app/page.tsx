@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import HeroVideo from "@/components/HeroVideo";
 
 const pillLinks = [
   { href: "/articles", label: "Articles", color: "#FF6900" },
@@ -56,13 +57,7 @@ export default function Home() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-navy">
         <div className="absolute inset-0 overflow-hidden">
-          <iframe
-            className="absolute top-1/2 left-1/2 w-[177.78vh] h-[56.25vw] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-            src="https://www.youtube.com/embed/iKWel-IRPko?autoplay=1&mute=1&loop=1&playlist=iKWel-IRPko&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3"
-            title="BamBam Diving background video"
-            allow="autoplay; encrypted-media"
-            frameBorder={0}
-          />
+          <HeroVideo />
           <div className="absolute inset-0 bg-navy/20" />
         </div>
         <div className="relative mx-auto max-w-6xl px-5 sm:px-8 pt-24 pb-28 sm:pt-32 sm:pb-36 text-center">
