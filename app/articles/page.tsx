@@ -12,8 +12,8 @@ export default function ArticlesPage() {
   const articles = getAllArticlesWithContent();
 
   return (
-    <div>
-      <div className="relative h-56 sm:h-72 w-full overflow-hidden">
+    <div className="relative">
+      <div className="fixed inset-0 -z-10">
         <Image
           src="/articles-bg.jpg"
           alt=""
@@ -21,7 +21,7 @@ export default function ArticlesPage() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-navy/40" />
+        <div className="absolute inset-0 bg-navy/60" />
       </div>
 
       <div className="mx-auto max-w-6xl px-5 sm:px-8 py-12 sm:py-16">
