@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ArticleMeta } from "@/lib/articles";
-import { crew } from "@/lib/crew";
+import { findContributor } from "@/lib/contributors";
+import TagPills from "./TagPills";
 import UnderwaterPanel from "./UnderwaterPanel";
 
 const tones: Array<"teal" | "deep" | "sand"> = ["teal", "deep", "sand"];
@@ -13,18 +14,22 @@ export default function ArticleCard({
   article: ArticleMeta;
   index?: number;
 }) {
-  const contributor = crew.find((c) => c.name === article.contributor);
+  const contributor = findContributor(article.contributor);
 
   return (
     <Link
       href={`/articles/${article.slug}`}
       className="group block border border-line hover:border-buoy/60 rounded-xl overflow-hidden bg-white transition-colors shadow-sm hover:shadow-md"
     >
-      <div className="relative">
-        <UnderwaterPanel
-          className="h-44 w-full"
-          tone={tones[index % tones.length]}
-        />
+      <div className="relative h-44 w-full">
+        {article.coverImage ? (
+          <Image src={article.coverImage} alt={article.title} fill className="object-cover" />
+        ) : (
+          <UnderwaterPanel
+            className="h-full w-full"
+            tone={tones[index % tones.length]}
+          />
+        )}
         <div
           className="absolute bottom-3 right-3 w-8 h-8 rounded-full border-2 border-white overflow-hidden bg-white/90 flex items-center justify-center shadow-sm"
           title={contributor ? contributor.name : "Contributor coming soon"}
@@ -40,10 +45,10 @@ export default function ArticleCard({
         </div>
       </div>
       <div className="p-6">
-        <p className="font-gauge text-[10px] tracking-[0.15em] uppercase text-buoy mb-3">
-          {article.categories.join(" · ")}
-        </p>
-        <h3 className="font-display text-xl sm:text-2xl text-ink group-hover:text-teal transition-colors">
+        <div className="mb-3">
+          <TagPills tags={article.tags} />
+        </div>
+        <h3 className="font-modern font-bold text-xl sm:text-2xl text-ink group-hover:text-teal transition-colors">
           {article.title}
         </h3>
         <p className="mt-3 text-ink-dim leading-relaxed">{article.excerpt}</p>

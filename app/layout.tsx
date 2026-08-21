@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Inter, JetBrains_Mono, Manrope } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -23,6 +23,12 @@ const jetbrains = JetBrains_Mono({
   weight: ["400", "500"],
 });
 
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+
 export const metadata: Metadata = {
   title: "BamBam Diving | Real Stories From Underwater",
   description:
@@ -35,7 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable} antialiased`}
+        className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable} ${manrope.variable} antialiased`}
       >
         <Analytics />
         <Header />

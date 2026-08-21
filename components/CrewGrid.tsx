@@ -77,7 +77,7 @@ export default function CrewGrid({ crew }: { crew: Member[] }) {
                 initials(member.name)
               )}
             </span>
-            <span className="font-body text-sm font-medium text-ink group-hover:text-buoy transition-colors text-center">
+            <span className="font-body text-sm font-medium text-white [text-shadow:0_1px_8px_rgba(0,0,0,0.6)] group-hover:text-buoy transition-colors text-center">
               {member.name}
             </span>
           </button>

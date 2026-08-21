@@ -3,18 +3,18 @@ import Image from "next/image";
 import HeroVideo from "@/components/HeroVideo";
 
 const pillLinks = [
-  { href: "/articles", label: "Articles", color: "#FF6900" },
-  { href: "/map", label: "Map", color: "#2F6778" },
-  { href: "/gallery", label: "Gallery", color: "#191D32" },
-  { href: "/crew", label: "Us", color: "#15687A" },
+  { href: "/articles", label: "Articles", color: "#FFD9B3" },
+  { href: "/map", label: "Map", color: "#C7E3E5" },
+  { href: "/gallery", label: "Gallery", color: "#CBCEE3" },
+  { href: "/crew", label: "Us", color: "#BEE3E8" },
 ];
 
 const carouselLogos = [
-  { src: "/logos/ash-creative.png", alt: "ASH Creative", href: undefined },
-  { src: "/logos/legasea.png", alt: "LegaSea", href: "https://www.legasea.co.nz" },
-  { src: "/logos/red-earth.png", alt: "Red Earth", href: "https://redearth.agency/" },
-  { src: "/logos/divers-underground.jpg", alt: "Divers Underground", href: "https://www.diversunderground.com/" },
-  { src: "/logos/deep-dive-dubai.png", alt: "Deep Dive Dubai", href: "https://www.deepdivedubai.com/" },
+  { src: "/logos/ash-creative.png", alt: "ASH Creative", href: undefined, blend: true },
+  { src: "/logos/legasea.png", alt: "LegaSea", href: "https://www.legasea.co.nz", blend: false },
+  { src: "/logos/red-earth.png", alt: "Red Earth", href: "https://redearth.agency/", blend: false },
+  { src: "/logos/divers-underground.jpg", alt: "Divers Underground", href: "https://www.diversunderground.com/", blend: true },
+  { src: "/logos/deep-dive-dubai.png", alt: "Deep Dive Dubai", href: "https://www.deepdivedubai.com/", blend: false },
 ];
 
 const socialButtons = [
@@ -80,7 +80,7 @@ export default function Home() {
             <Link
               key={pill.href}
               href={pill.href}
-              className="font-display text-xl sm:text-2xl text-white px-10 py-5 rounded-full transition-transform hover:scale-105"
+              className="font-display text-xl sm:text-2xl text-ink px-10 py-5 rounded-full transition-transform hover:scale-105"
               style={{ backgroundColor: pill.color }}
             >
               {pill.label}
@@ -90,8 +90,8 @@ export default function Home() {
       </section>
 
       {/* Logo carousel */}
-      <section className="border-t border-line bg-paper-dim py-14 overflow-hidden">
-        <div className="flex w-max animate-marquee">
+      <section className="border-t border-line bg-paper-dim py-5 overflow-hidden">
+        <div className="flex w-max bg-paper-dim animate-marquee">
           {[...carouselLogos, ...carouselLogos].map((logo, i) =>
             logo.href ? (
               <a
@@ -101,14 +101,24 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="relative w-40 h-20 mx-10 shrink-0 hover:scale-105 transition-transform"
               >
-                <Image src={logo.src} alt={logo.alt} fill className="object-contain" />
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  fill
+                  className={`object-contain ${logo.blend ? "mix-blend-multiply" : ""}`}
+                />
               </a>
             ) : (
               <div
                 key={`${logo.alt}-${i}`}
                 className="relative w-40 h-20 mx-10 shrink-0"
               >
-                <Image src={logo.src} alt={logo.alt} fill className="object-contain" />
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  fill
+                  className={`object-contain ${logo.blend ? "mix-blend-multiply" : ""}`}
+                />
               </div>
             )
           )}

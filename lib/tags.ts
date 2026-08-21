@@ -16,6 +16,7 @@ export const LOCATION_TAGS: TagDef[] = [
   { label: "Mexico", color: "#E05F00" },
   { label: "Indonesia", color: "#2FA7AD" },
   { label: "Fiji", color: "#FF6900" },
+  { label: "Dubai", color: "#C2410C" },
 ];
 
 export const ALL_TAGS: TagDef[] = [...SUBJECT_TAGS, ...LOCATION_TAGS];

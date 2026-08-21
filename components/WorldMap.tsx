@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { ALL_TAGS } from "@/lib/tags";
+import TagPills from "./TagPills";
 
 export type MapPin = {
   country: string;
@@ -12,15 +12,11 @@ export type MapPin = {
   articles: {
     slug: string;
     title: string;
-    tag?: string;
+    tags: string[];
     contributorName?: string;
     contributorPhoto?: string;
   }[];
 };
-
-function tagColor(tag?: string) {
-  return ALL_TAGS.find((t) => t.label === tag)?.color ?? "#2F6778";
-}
 
 export default function WorldMap({ pins }: { pins: MapPin[] }) {
   const [active, setActive] = useState<string | null>(null);
@@ -88,14 +84,9 @@ export default function WorldMap({ pins }: { pins: MapPin[] }) {
                       <span className="block text-ink group-hover:text-teal transition-colors truncate">
                         {a.title}
                       </span>
-                      {a.tag && (
-                        <span
-                          className="inline-block mt-1 text-[10px] font-medium text-white px-2 py-0.5 rounded-full"
-                          style={{ backgroundColor: tagColor(a.tag) }}
-                        >
-                          {a.tag}
-                        </span>
-                      )}
+                      <span className="block mt-1">
+                        <TagPills tags={a.tags} />
+                      </span>
                     </span>
                   </Link>
                 </li>
