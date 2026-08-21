@@ -91,7 +91,7 @@ export default function Home() {
 
       {/* Logo carousel */}
       <section className="border-t border-line bg-paper-dim py-5 overflow-hidden">
-        <div className="flex w-max animate-marquee">
+        <div className="flex w-max bg-paper-dim animate-marquee">
           {[...carouselLogos, ...carouselLogos].map((logo, i) =>
             logo.href ? (
               <a

@@ -12,7 +12,7 @@ const COUNTRY_COORDS: Record<string, { x: number; y: number }> = {
   Mexico: { x: 18, y: 51 },
   "New Zealand": { x: 90.5, y: 88 },
   Indonesia: { x: 73, y: 61 },
-  Dubai: { x: 62, y: 44 },
+  Dubai: { x: 56, y: 51 },
 };
 
 export default function MapPage() {
