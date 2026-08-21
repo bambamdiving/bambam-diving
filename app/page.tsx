@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import HeroVideo from "@/components/HeroVideo";
+import ArticleCard from "@/components/ArticleCard";
+import { getAllArticles } from "@/lib/articles";
 
 const pillLinks = [
   { href: "/articles", label: "Articles", color: "#FFD9B3" },
@@ -14,7 +16,11 @@ const carouselLogos = [
   { src: "/logos/legasea.png", alt: "LegaSea", href: "https://www.legasea.co.nz", blend: false },
   { src: "/logos/red-earth.png", alt: "Red Earth", href: "https://redearth.agency/", blend: false },
   { src: "/logos/divers-underground.jpg", alt: "Divers Underground", href: "https://www.diversunderground.com/", blend: true },
-  { src: "/logos/deep-dive-dubai.png", alt: "Deep Dive Dubai", href: "https://www.deepdivedubai.com/", blend: false },
+];
+
+const featuredSlugs = [
+  "shark-diving-in-fiji-with-beqa-adventure-divers",
+  "cenotes-cave-diving-in-mexico",
 ];
 
 const socialButtons = [
@@ -53,6 +59,11 @@ const socialButtons = [
 ];
 
 export default function Home() {
+  const articles = getAllArticles();
+  const featuredArticles = featuredSlugs
+    .map((slug) => articles.find((a) => a.slug === slug))
+    .filter((a): a is (typeof articles)[number] => Boolean(a));
+
   return (
     <div>
       {/* Hero */}
@@ -120,6 +131,21 @@ export default function Home() {
               </div>
             )
           )}
+        </div>
+      </section>
+
+      {/* Featured articles */}
+      <section className="mx-auto max-w-6xl px-5 sm:px-8 py-16 sm:py-20">
+        <p className="font-gauge text-buoy text-xs tracking-[0.2em] uppercase mb-3 text-center">
+          Fresh In
+        </p>
+        <h2 className="font-display text-3xl sm:text-4xl text-ink mb-8 text-center">
+          Featured Articles
+        </h2>
+        <div className="grid sm:grid-cols-2 gap-6">
+          {featuredArticles.map((article, i) => (
+            <ArticleCard key={article.slug} article={article} index={i} />
+          ))}
         </div>
       </section>
 
