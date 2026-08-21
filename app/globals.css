@@ -33,6 +33,7 @@
   --font-display: var(--font-fraunces);
   --font-body: var(--font-inter);
   --font-gauge: var(--font-jetbrains);
+  --font-modern: var(--font-manrope);
 }
 
 body {

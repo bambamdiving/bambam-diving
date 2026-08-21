@@ -1,6 +1,6 @@
 import WorldMap, { type MapPin } from "@/components/WorldMap";
 import { getAllArticles } from "@/lib/articles";
-import { crew } from "@/lib/crew";
+import { findContributor } from "@/lib/contributors";
 
 export const metadata = {
   title: "Map | BamBam Diving",
@@ -12,6 +12,7 @@ const COUNTRY_COORDS: Record<string, { x: number; y: number }> = {
   Mexico: { x: 18, y: 51 },
   "New Zealand": { x: 90.5, y: 88 },
   Indonesia: { x: 73, y: 61 },
+  Dubai: { x: 62, y: 44 },
 };
 
 export default function MapPage() {
@@ -24,11 +25,11 @@ export default function MapPage() {
         country,
         ...coords,
         articles: matches.map((a) => {
-          const contributor = crew.find((c) => c.name === a.contributor);
+          const contributor = findContributor(a.contributor);
           return {
             slug: a.slug,
             title: a.title,
-            tag: a.tags?.[0],
+            tags: a.tags ?? [],
             contributorName: contributor?.name,
             contributorPhoto: contributor?.photo,
           };

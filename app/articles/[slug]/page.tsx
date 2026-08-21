@@ -6,8 +6,9 @@ import {
   getArticleBySlug,
   markdownToHtml,
 } from "@/lib/articles";
-import { crew } from "@/lib/crew";
+import { findContributor } from "@/lib/contributors";
 import DiveLog from "@/components/DiveLog";
+import TagPills from "@/components/TagPills";
 import UnderwaterPanel from "@/components/UnderwaterPanel";
 
 export async function generateStaticParams() {
@@ -46,11 +47,17 @@ export default async function ArticlePage({
   }
 
   const contentHtml = await markdownToHtml(article.content);
-  const contributor = crew.find((c) => c.name === article.contributor);
+  const contributor = findContributor(article.contributor);
 
   return (
     <article>
-      <UnderwaterPanel className="h-64 sm:h-80 w-full" tone="teal" />
+      <div className="relative h-64 sm:h-80 w-full">
+        {article.coverImage ? (
+          <Image src={article.coverImage} alt={article.title} fill className="object-cover" priority />
+        ) : (
+          <UnderwaterPanel className="h-full w-full" tone="teal" />
+        )}
+      </div>
       <div className="mx-auto max-w-3xl px-5 sm:px-8 py-12 sm:py-16">
         <Link
           href="/articles"
@@ -59,10 +66,10 @@ export default async function ArticlePage({
           &larr; All Articles
         </Link>
 
-        <p className="font-gauge text-[11px] tracking-[0.15em] uppercase text-buoy mt-6 mb-3">
-          {article.categories.join(" · ")}
-        </p>
-        <h1 className="font-display text-4xl sm:text-5xl text-ink leading-tight mb-6">
+        <div className="mt-6 mb-4">
+          <TagPills tags={article.tags} />
+        </div>
+        <h1 className="font-modern font-extrabold text-4xl sm:text-5xl text-ink leading-tight mb-6">
           {article.title}
         </h1>
 
@@ -87,7 +94,7 @@ export default async function ArticlePage({
         )}
 
         <div
-          className="mt-10 font-body text-lg leading-relaxed text-ink-dim [&_h2]:font-display [&_h2]:text-ink [&_h2]:text-2xl [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:mb-5 [&_em]:text-ink-dim"
+          className="mt-10 font-body text-lg leading-relaxed text-ink-dim [&_h2]:font-modern [&_h2]:font-bold [&_h2]:text-ink [&_h2]:text-2xl [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:mb-5 [&_em]:text-ink-dim"
           dangerouslySetInnerHTML={{ __html: contentHtml }}
         />
 
@@ -103,7 +110,9 @@ export default async function ArticlePage({
                 Written by
               </p>
               <p className="font-display text-lg text-ink">{contributor.name}</p>
-              <p className="text-ink-dim text-sm leading-relaxed mt-1">{contributor.bio}</p>
+              {contributor.bio && (
+                <p className="text-ink-dim text-sm leading-relaxed mt-1">{contributor.bio}</p>
+              )}
             </div>
           </div>
         )}
