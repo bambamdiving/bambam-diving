@@ -59,7 +59,7 @@ export default function Header() {
             alt="BamBam Diving"
             width={280}
             height={112}
-            className="h-12 sm:h-14 w-auto"
+            className="h-12 sm:h-14 w-auto brightness-0 invert"
           />
         </Link>
 
