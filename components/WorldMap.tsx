@@ -13,57 +13,50 @@ export type MapPin = {
 
 export default function WorldMap({ pins }: { pins: MapPin[] }) {
   const [active, setActive] = useState<string | null>(null);
+  const activePin = pins.find((p) => p.country === active);
 
   return (
-    <div
-      className="relative aspect-[1774/887] w-full rounded-xl overflow-hidden border border-line"
-      onClick={() => setActive(null)}
-    >
-      <Image src="/map/world-map.png" alt="World map" fill className="object-cover" priority />
+    <div>
+      <div className="relative aspect-[1774/887] w-full rounded-xl overflow-hidden border border-line">
+        <Image src="/map/world-map.png" alt="World map" fill className="object-cover" priority />
 
-      {pins.map((pin) => (
-        <div
-          key={pin.country}
-          className="absolute -translate-x-1/2 -translate-y-1/2"
-          style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
-          onMouseEnter={() => setActive(pin.country)}
-          onMouseLeave={() => setActive((cur) => (cur === pin.country ? null : cur))}
-        >
+        {pins.map((pin) => (
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setActive(pin.country);
-            }}
+            key={pin.country}
+            onMouseEnter={() => setActive(pin.country)}
+            onClick={() => setActive(pin.country)}
             aria-label={`Articles in ${pin.country}`}
-            className="relative flex items-center justify-center w-5 h-5 rounded-full bg-buoy border-2 border-white shadow-lg"
+            className="absolute -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-5 h-5 rounded-full bg-buoy border-2 border-white shadow-lg"
+            style={{ left: `${pin.x}%`, top: `${pin.y}%` }}
           >
             <span className="absolute inset-0 rounded-full bg-buoy animate-ping opacity-60" />
           </button>
+        ))}
+      </div>
 
-          {active === pin.country && (
-            <div
-              className="absolute z-10 top-6 left-1/2 -translate-x-1/2 w-56 bg-white rounded-lg shadow-xl border border-line p-4 text-left"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <p className="font-gauge text-[10px] tracking-[0.15em] uppercase text-buoy mb-2">
-                {pin.country}
-              </p>
-              <ul className="space-y-1.5">
-                {pin.articles.map((a) => (
-                  <li key={a.slug}>
-                    <Link
-                      href={`/articles/${a.slug}`}
-                      className="text-sm text-ink hover:text-teal transition-colors"
-                    >
-                      {a.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      ))}
+      <div className="mt-6 border border-line rounded-xl bg-white p-6 min-h-[92px]">
+        {activePin ? (
+          <>
+            <p className="font-gauge text-[10px] tracking-[0.15em] uppercase text-buoy mb-3">
+              {activePin.country}
+            </p>
+            <ul className="space-y-2">
+              {activePin.articles.map((a) => (
+                <li key={a.slug}>
+                  <Link
+                    href={`/articles/${a.slug}`}
+                    className="text-ink hover:text-teal transition-colors"
+                  >
+                    {a.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <p className="text-ink-dim text-sm">Hover or tap a pin to see the articles from there.</p>
+        )}
+      </div>
     </div>
   );
 }

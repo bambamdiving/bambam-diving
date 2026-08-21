@@ -10,10 +10,11 @@ const pillLinks = [
 ];
 
 const carouselLogos = [
-  { src: "/logos/ash-creative.png", alt: "ASH Creative" },
-  { src: "/logos/legasea.png", alt: "LegaSea" },
-  { src: "/logos/red-earth.png", alt: "Red Earth" },
-  { src: "/logos/deep-dive-dubai.png", alt: "Deep Dive Dubai" },
+  { src: "/logos/ash-creative.png", alt: "ASH Creative", href: undefined },
+  { src: "/logos/legasea.png", alt: "LegaSea", href: "https://www.legasea.co.nz" },
+  { src: "/logos/red-earth.png", alt: "Red Earth", href: "https://redearth.agency/" },
+  { src: "/logos/divers-underground.jpg", alt: "Divers Underground", href: "https://www.diversunderground.com/" },
+  { src: "/logos/deep-dive-dubai.png", alt: "Deep Dive Dubai", href: "https://www.deepdivedubai.com/" },
 ];
 
 const socialButtons = [
@@ -91,14 +92,26 @@ export default function Home() {
       {/* Logo carousel */}
       <section className="border-t border-line bg-paper-dim py-14 overflow-hidden">
         <div className="flex w-max animate-marquee">
-          {[...carouselLogos, ...carouselLogos].map((logo, i) => (
-            <div
-              key={`${logo.alt}-${i}`}
-              className="relative w-40 h-20 mx-10 shrink-0 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all"
-            >
-              <Image src={logo.src} alt={logo.alt} fill className="object-contain" />
-            </div>
-          ))}
+          {[...carouselLogos, ...carouselLogos].map((logo, i) =>
+            logo.href ? (
+              <a
+                key={`${logo.alt}-${i}`}
+                href={logo.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative w-40 h-20 mx-10 shrink-0 hover:scale-105 transition-transform"
+              >
+                <Image src={logo.src} alt={logo.alt} fill className="object-contain" />
+              </a>
+            ) : (
+              <div
+                key={`${logo.alt}-${i}`}
+                className="relative w-40 h-20 mx-10 shrink-0"
+              >
+                <Image src={logo.src} alt={logo.alt} fill className="object-contain" />
+              </div>
+            )
+          )}
         </div>
       </section>
 

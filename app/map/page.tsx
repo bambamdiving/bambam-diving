@@ -7,10 +7,10 @@ export const metadata = {
 };
 
 const COUNTRY_COORDS: Record<string, { x: number; y: number }> = {
-  Fiji: { x: 97, y: 74 },
-  Mexico: { x: 25.5, y: 47 },
-  "New Zealand": { x: 95.5, y: 90 },
-  Indonesia: { x: 85.5, y: 61 },
+  Fiji: { x: 96, y: 75 },
+  Mexico: { x: 26, y: 53 },
+  "New Zealand": { x: 90.5, y: 88 },
+  Indonesia: { x: 73, y: 61 },
 };
 
 export default function MapPage() {
