@@ -99,14 +99,14 @@ export default function Header() {
           );
         })}
       </nav>
-      <nav className="md:hidden flex items-center gap-3 overflow-x-auto px-5 pb-3 font-body text-base text-navy-dim border-t border-white/10 pt-3">
+      <nav className="md:hidden flex items-center justify-between gap-1 px-2 pb-3 font-body text-[11px] text-navy-dim border-t border-white/10 pt-3">
         {navLinks.map((link) => {
           const active = pathname === link.href;
           return (
             <Link
               key={link.href}
               href={link.href}
-              className={`px-4 py-1.5 rounded-full whitespace-nowrap transition-colors ${
+              className={`px-2 py-1 rounded-full whitespace-nowrap transition-colors ${
                 active ? "bg-buoy text-white" : "hover:text-buoy"
               }`}
             >
