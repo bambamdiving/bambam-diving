@@ -57,9 +57,9 @@ export default function Header() {
           <Image
             src="/logo.png"
             alt="BamBam Diving"
-            width={64}
-            height={64}
-            className="rounded-lg"
+            width={280}
+            height={112}
+            className="h-12 sm:h-14 w-auto"
           />
         </Link>
 
