@@ -68,12 +68,10 @@ export default function ArticleFilters({ articles }: { articles: SearchableArtic
               <button
                 key={tag.label}
                 onClick={() => toggle(tag.label)}
-                className="font-body text-sm font-medium px-4 py-2 rounded-full border transition-colors"
-                style={
-                  active
-                    ? { backgroundColor: tag.color, borderColor: tag.color, color: "#fff" }
-                    : { borderColor: tag.color, color: tag.color, backgroundColor: "transparent" }
-                }
+                className={`font-body text-sm font-medium px-4 py-2 rounded-full text-white shadow-sm transition-all ${
+                  active ? "ring-2 ring-white ring-offset-2 ring-offset-navy/25" : "opacity-90 hover:opacity-100"
+                }`}
+                style={{ backgroundColor: tag.color }}
               >
                 {tag.label}
               </button>
@@ -96,12 +94,10 @@ export default function ArticleFilters({ articles }: { articles: SearchableArtic
             <button
               key={tag.label}
               onClick={() => toggle(tag.label)}
-              className="font-body text-sm font-medium px-4 py-2 rounded-full border transition-colors"
-              style={
-                active
-                  ? { backgroundColor: tag.color, borderColor: tag.color, color: "#fff" }
-                  : { borderColor: tag.color, color: tag.color, backgroundColor: "transparent" }
-              }
+              className={`font-body text-sm font-medium px-4 py-2 rounded-full text-white shadow-sm transition-all ${
+                active ? "ring-2 ring-white ring-offset-2 ring-offset-navy/25" : "opacity-90 hover:opacity-100"
+              }`}
+              style={{ backgroundColor: tag.color }}
             >
               {tag.label}
             </button>

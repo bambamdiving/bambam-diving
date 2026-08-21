@@ -1,5 +1,6 @@
 import WorldMap, { type MapPin } from "@/components/WorldMap";
 import { getAllArticles } from "@/lib/articles";
+import { crew } from "@/lib/crew";
 
 export const metadata = {
   title: "Map | BamBam Diving",
@@ -8,7 +9,7 @@ export const metadata = {
 
 const COUNTRY_COORDS: Record<string, { x: number; y: number }> = {
   Fiji: { x: 96, y: 75 },
-  Mexico: { x: 26, y: 53 },
+  Mexico: { x: 18, y: 51 },
   "New Zealand": { x: 90.5, y: 88 },
   Indonesia: { x: 73, y: 61 },
 };
@@ -22,7 +23,16 @@ export default function MapPage() {
       return {
         country,
         ...coords,
-        articles: matches.map((a) => ({ slug: a.slug, title: a.title })),
+        articles: matches.map((a) => {
+          const contributor = crew.find((c) => c.name === a.contributor);
+          return {
+            slug: a.slug,
+            title: a.title,
+            tag: a.tags?.[0],
+            contributorName: contributor?.name,
+            contributorPhoto: contributor?.photo,
+          };
+        }),
       };
     })
     .filter((pin) => pin.articles.length > 0);
@@ -36,7 +46,7 @@ export default function MapPage() {
         Map
       </h1>
       <p className="text-ink-dim max-w-xl mb-12">
-        Glowing pins mark countries we&rsquo;ve got dive stories from &mdash; hover or tap one to
+        Glowing pins mark countries we&rsquo;ve got dive stories from &mdash; tap one to
         see the articles. Everywhere else is still uncharted.
       </p>
 
