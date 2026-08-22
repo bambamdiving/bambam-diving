@@ -14,13 +14,14 @@ const carouselLogos: Array<{
   alt: string;
   href?: string;
   blend?: "multiply" | "screen";
+  invert?: boolean;
 }> = [
   { src: "/logos/ash-creative.png", alt: "ASH Creative", blend: "multiply" },
   { src: "/logos/legasea.png", alt: "LegaSea", href: "https://www.legasea.co.nz" },
   { src: "/logos/red-earth.png", alt: "Red Earth", href: "https://redearth.agency/" },
   { src: "/logos/divers-underground.jpg", alt: "Divers Underground", href: "https://www.diversunderground.com/", blend: "multiply" },
   { src: "/logos/beqa-adventure-divers.jpg", alt: "Beqa Adventure Divers", href: "https://www.fijisharkdive.com" },
-  { src: "/logos/fiordland-expeditions.png", alt: "Fiordland Expeditions", href: "https://fiordlandexpeditions.co.nz/", blend: "screen" },
+  { src: "/logos/fiordland-expeditions.png", alt: "Fiordland Expeditions", href: "https://fiordlandexpeditions.co.nz/", blend: "multiply", invert: true },
 ];
 
 const featuredSlugs = [
@@ -105,7 +106,7 @@ export default function Home() {
                   src={logo.src}
                   alt={logo.alt}
                   fill
-                  className={`object-contain ${logo.blend ? blendClasses[logo.blend] : ""}`}
+                  className={`object-contain ${logo.blend ? blendClasses[logo.blend] : ""} ${logo.invert ? "invert" : ""}`}
                 />
               </a>
             ) : (
@@ -117,7 +118,7 @@ export default function Home() {
                   src={logo.src}
                   alt={logo.alt}
                   fill
-                  className={`object-contain ${logo.blend ? blendClasses[logo.blend] : ""}`}
+                  className={`object-contain ${logo.blend ? blendClasses[logo.blend] : ""} ${logo.invert ? "invert" : ""}`}
                 />
               </div>
             )
