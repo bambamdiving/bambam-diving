@@ -103,14 +103,14 @@ export default function Header() {
         </div>
       </div>
 
-      <nav className="md:hidden flex items-center justify-between gap-1 px-2 pb-3 font-body text-[11px] text-navy-dim border-t border-white/10 pt-3">
+      <nav className="md:hidden flex items-center justify-between gap-1 px-2 pb-3 font-body text-[13.2px] text-navy-dim border-t border-white/10 pt-3">
         {navLinks.map((link) => {
           const active = pathname === link.href;
           const className = link.color
-            ? `px-2 py-1 rounded-full whitespace-nowrap font-medium text-ink ${
+            ? `px-[9.6px] py-[4.8px] rounded-full whitespace-nowrap font-medium text-ink ${
                 active ? "ring-2 ring-white" : ""
               }`
-            : `px-2 py-1 rounded-full whitespace-nowrap transition-colors ${
+            : `px-[9.6px] py-[4.8px] rounded-full whitespace-nowrap transition-colors ${
                 active ? "bg-buoy text-white" : "hover:text-buoy"
               }`;
           return (
