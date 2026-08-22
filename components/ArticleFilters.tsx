@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { SearchableArticle } from "@/lib/articles";
-import { SUBJECT_TAGS, LOCATION_TAGS } from "@/lib/tags";
 import ArticleCard from "./ArticleCard";
 
 function SearchIcon() {
@@ -17,24 +16,18 @@ function SearchIcon() {
 
 export default function ArticleFilters({ articles }: { articles: SearchableArticle[] }) {
   const searchParams = useSearchParams();
-  const [selected, setSelected] = useState<string[]>([]);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [contributor, setContributor] = useState<string | null>(
     searchParams.get("contributor")
   );
-
-  function toggle(tag: string) {
-    setSelected((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    );
-  }
+  const [tag, setTag] = useState<string | null>(searchParams.get("tag"));
 
   const q = query.trim().toLowerCase();
 
   const filtered = articles.filter((a) => {
     const matchesContributor = !contributor || a.contributor === contributor;
-    const matchesTags = selected.length === 0 || a.tags?.some((t) => selected.includes(t));
+    const matchesTag = !tag || a.tags?.includes(tag);
     const matchesQuery =
       q.length === 0 ||
       a.title.toLowerCase().includes(q) ||
@@ -42,42 +35,43 @@ export default function ArticleFilters({ articles }: { articles: SearchableArtic
       a.content.toLowerCase().includes(q) ||
       a.categories.some((c) => c.toLowerCase().includes(q)) ||
       a.tags?.some((t) => t.toLowerCase().includes(q));
-    return matchesContributor && matchesTags && matchesQuery;
+    return matchesContributor && matchesTag && matchesQuery;
   });
 
   return (
     <div>
-      {contributor && (
-        <div className="flex items-center gap-2 mb-6">
-          <span className="font-body text-sm text-ink-dim">
-            Showing articles by <strong className="text-ink">{contributor}</strong>
-          </span>
-          <button
-            onClick={() => setContributor(null)}
-            className="font-body text-sm text-teal hover:text-buoy transition-colors"
-          >
-            Clear &times;
-          </button>
+      {(contributor || tag) && (
+        <div className="flex flex-wrap items-center gap-4 mb-6">
+          {contributor && (
+            <div className="flex items-center gap-2">
+              <span className="font-body text-sm text-ink-dim">
+                Showing articles by <strong className="text-ink">{contributor}</strong>
+              </span>
+              <button
+                onClick={() => setContributor(null)}
+                className="font-body text-sm text-teal hover:text-buoy transition-colors"
+              >
+                Clear &times;
+              </button>
+            </div>
+          )}
+          {tag && (
+            <div className="flex items-center gap-2">
+              <span className="font-body text-sm text-ink-dim">
+                Showing articles tagged <strong className="text-ink">{tag}</strong>
+              </span>
+              <button
+                onClick={() => setTag(null)}
+                className="font-body text-sm text-teal hover:text-buoy transition-colors"
+              >
+                Clear &times;
+              </button>
+            </div>
+          )}
         </div>
       )}
-      <div className="flex items-start justify-between gap-4 mb-4">
-        <div className="flex flex-wrap gap-3">
-          {SUBJECT_TAGS.map((tag) => {
-            const active = selected.includes(tag.label);
-            return (
-              <button
-                key={tag.label}
-                onClick={() => toggle(tag.label)}
-                className={`font-body text-sm font-medium px-4 py-2 rounded-full text-white shadow-sm transition-all ${
-                  active ? "ring-2 ring-white ring-offset-2 ring-offset-navy/25" : "opacity-90 hover:opacity-100"
-                }`}
-                style={{ backgroundColor: tag.color }}
-              >
-                {tag.label}
-              </button>
-            );
-          })}
-        </div>
+
+      <div className="flex justify-end mb-6">
         <button
           onClick={() => setSearchOpen((v) => !v)}
           aria-label="Search articles"
@@ -85,24 +79,6 @@ export default function ArticleFilters({ articles }: { articles: SearchableArtic
         >
           <SearchIcon />
         </button>
-      </div>
-
-      <div className="flex flex-wrap gap-3 mb-6">
-        {LOCATION_TAGS.map((tag) => {
-          const active = selected.includes(tag.label);
-          return (
-            <button
-              key={tag.label}
-              onClick={() => toggle(tag.label)}
-              className={`font-body text-sm font-medium px-4 py-2 rounded-full text-white shadow-sm transition-all ${
-                active ? "ring-2 ring-white ring-offset-2 ring-offset-navy/25" : "opacity-90 hover:opacity-100"
-              }`}
-              style={{ backgroundColor: tag.color }}
-            >
-              {tag.label}
-            </button>
-          );
-        })}
       </div>
 
       {searchOpen && (

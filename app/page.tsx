@@ -1,15 +1,8 @@
-import Link from "next/link";
 import Image from "next/image";
 import HeroVideo from "@/components/HeroVideo";
 import ArticleCard from "@/components/ArticleCard";
+import TagFilterLinks from "@/components/TagFilterLinks";
 import { getAllArticles } from "@/lib/articles";
-
-const pillLinks = [
-  { href: "/articles", label: "Articles", color: "#FFD9B3" },
-  { href: "/map", label: "Map", color: "#C7E3E5" },
-  { href: "/gallery", label: "Gallery", color: "#CBCEE3" },
-  { href: "/crew", label: "Us", color: "#BEE3E8" },
-];
 
 const carouselLogos = [
   { src: "/logos/ash-creative.png", alt: "ASH Creative", href: undefined, blend: true },
@@ -72,29 +65,15 @@ export default function Home() {
           <HeroVideo />
           <div className="absolute inset-0 bg-navy/20" />
         </div>
-        <div className="relative mx-auto flex min-h-[560px] sm:min-h-[680px] max-w-6xl flex-col justify-between px-5 sm:px-8 pt-24 pb-10 sm:pt-32 sm:pb-14 text-center">
-          <div>
-            <h1 className="font-display italic text-5xl sm:text-6xl md:text-7xl leading-[1.05] text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
-              The World&rsquo;s Best
-              <br />
-              <span className="text-buoy">Dive Site</span>
-            </h1>
-            <p className="mt-4 font-body text-white/70 [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
-              *probably not the world&rsquo;s best dive site
-            </p>
-          </div>
-          <div className="flex flex-wrap justify-center gap-5 pt-10">
-            {pillLinks.map((pill) => (
-              <Link
-                key={pill.href}
-                href={pill.href}
-                className="font-display text-xl sm:text-2xl text-ink px-10 py-5 rounded-full transition-transform hover:scale-105"
-                style={{ backgroundColor: pill.color }}
-              >
-                {pill.label}
-              </Link>
-            ))}
-          </div>
+        <div className="relative mx-auto max-w-6xl px-5 sm:px-8 pt-24 pb-28 sm:pt-32 sm:pb-36 text-center">
+          <h1 className="font-display italic text-5xl sm:text-6xl md:text-7xl leading-[1.05] text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.6)]">
+            The World&rsquo;s Best
+            <br />
+            <span className="text-buoy">Dive Site</span>
+          </h1>
+          <p className="mt-4 font-body text-white/70 [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
+            *probably not the world&rsquo;s best dive site
+          </p>
         </div>
       </section>
 
@@ -139,9 +118,12 @@ export default function Home() {
         <p className="font-gauge text-buoy text-xs tracking-[0.2em] uppercase mb-3 text-center">
           Fresh In
         </p>
-        <h2 className="font-display text-3xl sm:text-4xl text-ink mb-8 text-center">
+        <h2 className="font-display text-3xl sm:text-4xl text-ink mb-6 text-center">
           Featured Articles
         </h2>
+        <div className="flex justify-center mb-8">
+          <TagFilterLinks />
+        </div>
         <div className="grid sm:grid-cols-2 gap-6">
           {featuredArticles.map((article, i) => (
             <ArticleCard key={article.slug} article={article} index={i} />

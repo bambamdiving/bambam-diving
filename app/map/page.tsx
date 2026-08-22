@@ -1,5 +1,6 @@
 import MapView from "@/components/MapView";
 import { type MapPin } from "@/components/WorldMap";
+import TagFilterLinks from "@/components/TagFilterLinks";
 import { getAllArticles } from "@/lib/articles";
 import { findContributor } from "@/lib/contributors";
 
@@ -62,10 +63,14 @@ export default function MapPage() {
           .filter((country) => !NON_COUNTRY_PINS.includes(country))}
       />
 
-      <p className="text-ink-dim text-sm mt-4 text-center">
+      <p className="text-ink-dim text-sm mt-4 mb-8 text-center">
         Pins are geo-located to the country, not the exact dive site &mdash; happy to make these
         more precise once we&rsquo;re pinning real coordinates.
       </p>
+
+      <div className="flex justify-center">
+        <TagFilterLinks />
+      </div>
     </div>
   );
 }
