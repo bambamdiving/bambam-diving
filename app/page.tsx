@@ -4,11 +4,23 @@ import ArticleCard from "@/components/ArticleCard";
 import TagFilterLinks from "@/components/TagFilterLinks";
 import { getAllArticles } from "@/lib/articles";
 
-const carouselLogos = [
-  { src: "/logos/ash-creative.png", alt: "ASH Creative", href: undefined, blend: true },
-  { src: "/logos/legasea.png", alt: "LegaSea", href: "https://www.legasea.co.nz", blend: false },
-  { src: "/logos/red-earth.png", alt: "Red Earth", href: "https://redearth.agency/", blend: false },
-  { src: "/logos/divers-underground.jpg", alt: "Divers Underground", href: "https://www.diversunderground.com/", blend: true },
+const blendClasses = {
+  multiply: "mix-blend-multiply",
+  screen: "mix-blend-screen",
+};
+
+const carouselLogos: Array<{
+  src: string;
+  alt: string;
+  href?: string;
+  blend?: "multiply" | "screen";
+}> = [
+  { src: "/logos/ash-creative.png", alt: "ASH Creative", blend: "multiply" },
+  { src: "/logos/legasea.png", alt: "LegaSea", href: "https://www.legasea.co.nz" },
+  { src: "/logos/red-earth.png", alt: "Red Earth", href: "https://redearth.agency/" },
+  { src: "/logos/divers-underground.jpg", alt: "Divers Underground", href: "https://www.diversunderground.com/", blend: "multiply" },
+  { src: "/logos/beqa-adventure-divers.jpg", alt: "Beqa Adventure Divers", href: "https://www.fijisharkdive.com" },
+  { src: "/logos/fiordland-expeditions.png", alt: "Fiordland Expeditions", href: "https://fiordlandexpeditions.co.nz/", blend: "screen" },
 ];
 
 const featuredSlugs = [
@@ -93,7 +105,7 @@ export default function Home() {
                   src={logo.src}
                   alt={logo.alt}
                   fill
-                  className={`object-contain ${logo.blend ? "mix-blend-multiply" : ""}`}
+                  className={`object-contain ${logo.blend ? blendClasses[logo.blend] : ""}`}
                 />
               </a>
             ) : (
@@ -105,7 +117,7 @@ export default function Home() {
                   src={logo.src}
                   alt={logo.alt}
                   fill
-                  className={`object-contain ${logo.blend ? "mix-blend-multiply" : ""}`}
+                  className={`object-contain ${logo.blend ? blendClasses[logo.blend] : ""}`}
                 />
               </div>
             )
