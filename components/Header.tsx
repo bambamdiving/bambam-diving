@@ -6,10 +6,10 @@ import { usePathname } from "next/navigation";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/articles", label: "Articles" },
-  { href: "/map", label: "Map" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/crew", label: "Us" },
+  { href: "/articles", label: "Articles", color: "#FFD9B3" },
+  { href: "/map", label: "Map", color: "#C7E3E5" },
+  { href: "/gallery", label: "Gallery", color: "#CBCEE3" },
+  { href: "/crew", label: "Us", color: "#BEE3E8" },
 ];
 
 const socialLinks = [
@@ -66,13 +66,19 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-2 font-body text-base text-navy-dim">
           {navLinks.map((link) => {
             const active = pathname === link.href;
+            const className = link.color
+              ? `px-4 py-1.5 rounded-full font-medium text-ink transition-transform hover:scale-105 ${
+                  active ? "ring-2 ring-white" : ""
+                }`
+              : `px-4 py-1.5 rounded-full transition-colors ${
+                  active ? "bg-buoy text-white" : "hover:text-buoy"
+                }`;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-4 py-1.5 rounded-full transition-colors ${
-                  active ? "bg-buoy text-white" : "hover:text-buoy"
-                }`}
+                className={className}
+                style={link.color ? { backgroundColor: link.color } : undefined}
               >
                 {link.label}
               </Link>
@@ -100,13 +106,19 @@ export default function Header() {
       <nav className="md:hidden flex items-center justify-between gap-1 px-2 pb-3 font-body text-[11px] text-navy-dim border-t border-white/10 pt-3">
         {navLinks.map((link) => {
           const active = pathname === link.href;
+          const className = link.color
+            ? `px-2 py-1 rounded-full whitespace-nowrap font-medium text-ink ${
+                active ? "ring-2 ring-white" : ""
+              }`
+            : `px-2 py-1 rounded-full whitespace-nowrap transition-colors ${
+                active ? "bg-buoy text-white" : "hover:text-buoy"
+              }`;
           return (
             <Link
               key={link.href}
               href={link.href}
-              className={`px-2 py-1 rounded-full whitespace-nowrap transition-colors ${
-                active ? "bg-buoy text-white" : "hover:text-buoy"
-              }`}
+              className={className}
+              style={link.color ? { backgroundColor: link.color } : undefined}
             >
               {link.label}
             </Link>
