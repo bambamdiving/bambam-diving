@@ -28,25 +28,21 @@ export default function CrewPage() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-navy/70" />
+        <div className="absolute inset-0 bg-white/60" />
       </div>
 
       <div className="mx-auto max-w-6xl px-5 sm:px-8 pt-8 sm:pt-10 pb-16 sm:pb-20">
-        <h1 className="font-display text-4xl sm:text-5xl text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.6)] mb-8">
+        <h1 className="font-display text-4xl sm:text-5xl text-ink mb-8">
           Us
         </h1>
 
         <CrewGrid crew={crewWithArticles} />
 
         <div className="bg-panel rounded-xl p-5 flex flex-wrap items-center justify-between gap-4 mt-16">
-          <div>
-            <h2 className="font-display text-xl text-ink">
-              Got a Story to Add?
-            </h2>
-            <p className="text-ink-dim text-sm">
-              We&rsquo;d love to have you join the crew.
-            </p>
-          </div>
+          <p className="font-display text-lg text-ink">
+            We&rsquo;re always on the lookout for contributors &ndash; if you&rsquo;ve got
+            something interesting to share, hit the Get Published button.
+          </p>
           <Link
             href="/become-a-contributor"
             className="shrink-0 font-body text-sm font-medium bg-teal hover:bg-teal-deep text-white px-6 py-3 rounded-full transition-colors"
@@ -55,8 +51,8 @@ export default function CrewPage() {
           </Link>
         </div>
 
-        <div className="mt-16 pt-12 border-t border-white/20">
-          <h2 className="font-display text-2xl text-white [text-shadow:0_1px_8px_rgba(0,0,0,0.6)] mb-8">
+        <div className="mt-16 pt-12 border-t border-ink/20">
+          <h2 className="font-display text-2xl text-ink mb-8">
             Honourable Mentions
           </h2>
           <div className="flex items-center gap-4">
@@ -69,8 +65,8 @@ export default function CrewPage() {
               />
             </span>
             <div>
-              <p className="font-display text-lg text-white [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">Deep Dive Dubai</p>
-              <p className="text-white/80 text-sm [text-shadow:0_1px_8px_rgba(0,0,0,0.6)]">
+              <p className="font-display text-lg text-ink">Deep Dive Dubai</p>
+              <p className="text-ink-dim text-sm">
                 <a
                   href="https://www.deepdivedubai.com"
                   target="_blank"

@@ -4,9 +4,6 @@ import TagFilterLinks from "@/components/TagFilterLinks";
 import { getAllArticles } from "@/lib/articles";
 import { findContributor } from "@/lib/contributors";
 
-// Dubai is an emirate, not a country, so it's excluded from the country tag list.
-const NON_COUNTRY_PINS = ["Dubai"];
-
 export const metadata = {
   title: "Map | BamBam Diving",
   description: "Every dive site logged so far, in one place.",
@@ -16,7 +13,7 @@ const COUNTRY_COORDS: Record<string, { x: number; y: number }> = {
   Fiji: { x: 96, y: 75 },
   Mexico: { x: 18, y: 51 },
   "New Zealand": { x: 90.5, y: 88 },
-  Indonesia: { x: 73, y: 61 },
+  Indonesia: { x: 74, y: 65 },
   Dubai: { x: 56, y: 51 },
 };
 
@@ -56,12 +53,7 @@ export default function MapPage() {
         see the articles. Everywhere else is still uncharted.
       </p>
 
-      <MapView
-        pins={pins}
-        tagCountries={pins
-          .map((pin) => pin.country)
-          .filter((country) => !NON_COUNTRY_PINS.includes(country))}
-      />
+      <MapView pins={pins} tagCountries={pins.map((pin) => pin.country)} />
 
       <p className="text-ink-dim text-sm mt-4 mb-8 text-center">
         Pins are geo-located to the country, not the exact dive site &mdash; happy to make these
