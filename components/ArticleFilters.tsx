@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { SearchableArticle } from "@/lib/articles";
 import ArticleCard from "./ArticleCard";
@@ -23,6 +23,11 @@ export default function ArticleFilters({ articles }: { articles: SearchableArtic
     searchParams.get("contributor")
   );
   const [tag, setTag] = useState<string | null>(searchParams.get("tag"));
+
+  useEffect(() => {
+    setContributor(searchParams.get("contributor"));
+    setTag(searchParams.get("tag"));
+  }, [searchParams]);
 
   const q = query.trim().toLowerCase();
 
