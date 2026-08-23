@@ -68,7 +68,7 @@ export default function CrewGrid({ crew }: { crew: Member[] }) {
             className="flex flex-col items-center gap-3 group"
           >
             <span
-              className="relative flex items-center justify-center w-[115px] h-[115px] rounded-full text-white font-display text-2xl overflow-hidden group-hover:scale-105 transition-transform"
+              className="relative flex items-center justify-center w-[115px] h-[115px] md:w-[150px] md:h-[150px] rounded-full text-white font-display text-2xl overflow-hidden group-hover:scale-105 transition-transform"
               style={{ backgroundColor: avatarTones[i % avatarTones.length] }}
             >
               {member.photo ? (
@@ -77,7 +77,7 @@ export default function CrewGrid({ crew }: { crew: Member[] }) {
                 initials(member.name)
               )}
             </span>
-            <span className="font-body text-sm font-medium text-ink group-hover:text-buoy transition-colors text-center">
+            <span className="font-body text-sm font-medium md:text-lg md:font-bold text-ink group-hover:text-buoy transition-colors text-center">
               {member.name}
             </span>
           </button>
