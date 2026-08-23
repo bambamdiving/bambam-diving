@@ -27,6 +27,8 @@ const carouselLogos: Array<{
 const featuredSlugs = [
   "shark-diving-in-fiji-with-beqa-adventure-divers",
   "cenotes-cave-diving-in-mexico",
+  "diving-nusa-lembongan",
+  "diving-fishing-in-fiordland-new-zealand",
 ];
 
 const socialButtons = [
