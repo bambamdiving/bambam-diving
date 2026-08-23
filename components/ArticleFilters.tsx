@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { SearchableArticle } from "@/lib/articles";
 import ArticleCard from "./ArticleCard";
+import TagFilterLinks from "./TagFilterLinks";
 
 function SearchIcon() {
   return (
@@ -101,6 +102,10 @@ export default function ArticleFilters({ articles }: { articles: SearchableArtic
           ))}
         </div>
       )}
+
+      <div className="flex justify-center mt-10">
+        <TagFilterLinks />
+      </div>
     </div>
   );
 }
