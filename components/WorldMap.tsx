@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import TagPills from "./TagPills";
-import { verifyPin, savePinPosition } from "@/app/map/actions";
+import { savePinPosition } from "@/app/map/actions";
 
 export type MapPin = {
   country: string;
@@ -36,30 +36,31 @@ export default function WorldMap({
     () => Object.fromEntries(pins.map((p) => [p.country, { x: p.x, y: p.y }]))
   );
   const [editMode, setEditMode] = useState(false);
-  const [showPinPrompt, setShowPinPrompt] = useState(false);
-  const [pinValue, setPinValue] = useState("");
-  const [pinError, setPinError] = useState<string | null>(null);
-  const [pinPending, setPinPending] = useState(false);
   const [dragging, setDragging] = useState<string | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [hovered, setHovered] = useState<string | null>(null);
   const dragStart = useRef<{ x: number; y: number } | null>(null);
+  const hoverCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const activePin = pins.find((p) => p.country === active);
+  const displayedCountry = hovered ?? active;
+  const activePin = pins.find((p) => p.country === displayedCountry);
 
-  function handlePinSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setPinPending(true);
-    setPinError(null);
-    verifyPin(pinValue).then((result) => {
-      setPinPending(false);
-      if (result.error) {
-        setPinError(result.error);
-      } else {
-        setEditMode(true);
-        setShowPinPrompt(false);
-        setPinValue("");
-      }
-    });
+  function cancelHoverClose() {
+    if (hoverCloseTimer.current) {
+      clearTimeout(hoverCloseTimer.current);
+      hoverCloseTimer.current = null;
+    }
+  }
+
+  function scheduleHoverClose() {
+    cancelHoverClose();
+    hoverCloseTimer.current = setTimeout(() => setHovered(null), 150);
+  }
+
+  function closePopup() {
+    cancelHoverClose();
+    setHovered(null);
+    onActiveChange(null);
   }
 
   function handlePointerDown(country: string) {
@@ -112,6 +113,12 @@ export default function WorldMap({
             <button
               key={pin.country}
               onPointerDown={handlePointerDown(pin.country)}
+              onMouseEnter={() => {
+                if (editMode) return;
+                cancelHoverClose();
+                setHovered(pin.country);
+              }}
+              onMouseLeave={scheduleHoverClose}
               onClick={() => {
                 if (!editMode) onActiveChange(pin.country);
               }}
@@ -128,50 +135,17 @@ export default function WorldMap({
           );
         })}
 
-        <button
-          type="button"
-          onClick={() => {
-            if (editMode) {
-              setEditMode(false);
-            } else if (initialAuthed) {
-              setEditMode(true);
-            } else {
-              setShowPinPrompt((v) => !v);
-            }
-          }}
-          aria-label={editMode ? "Done editing pin positions" : "Edit pin positions"}
-          className="absolute top-3 right-3 flex items-center justify-center w-8 h-8 rounded-full bg-white/90 text-ink-dim hover:text-buoy shadow-sm transition-colors"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
-            <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-
-        {showPinPrompt && (
-          <form
-            onSubmit={handlePinSubmit}
-            className="absolute top-14 right-3 bg-white rounded-xl shadow-lg border border-line p-4 flex flex-col gap-2 w-48"
-            onPointerDown={(e) => e.stopPropagation()}
+        {initialAuthed && (
+          <button
+            type="button"
+            onClick={() => setEditMode((v) => !v)}
+            aria-label={editMode ? "Done editing pin positions" : "Edit pin positions"}
+            className="absolute top-3 right-3 flex items-center justify-center w-8 h-8 rounded-full bg-white/90 text-ink-dim hover:text-buoy shadow-sm transition-colors"
           >
-            <input
-              type="password"
-              inputMode="numeric"
-              maxLength={4}
-              value={pinValue}
-              onChange={(e) => setPinValue(e.target.value)}
-              placeholder="PIN"
-              autoFocus
-              className="border border-line rounded-lg px-3 py-2 text-center text-ink tracking-[0.3em] outline-none focus:border-buoy"
-            />
-            <button
-              type="submit"
-              disabled={pinPending}
-              className="bg-buoy hover:bg-buoy-dim disabled:opacity-60 text-white text-sm font-medium rounded-lg py-2 transition-colors"
-            >
-              {pinPending ? "Checking..." : "Unlock editing"}
-            </button>
-            {pinError && <p className="text-buoy text-xs text-center">{pinError}</p>}
-          </form>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+              <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
         )}
 
         {editMode && (
@@ -184,14 +158,16 @@ export default function WorldMap({
       {activePin && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-navy/70 px-5"
-          onClick={() => onActiveChange(null)}
+          onClick={closePopup}
         >
           <div
             className="bg-white rounded-xl max-w-md w-full p-8 relative"
             onClick={(e) => e.stopPropagation()}
+            onMouseEnter={cancelHoverClose}
+            onMouseLeave={scheduleHoverClose}
           >
             <button
-              onClick={() => onActiveChange(null)}
+              onClick={closePopup}
               aria-label="Close"
               className="absolute top-4 right-4 text-ink-dim hover:text-buoy transition-colors"
             >
@@ -209,9 +185,9 @@ export default function WorldMap({
                 <li key={a.slug}>
                   <Link
                     href={`/articles/${a.slug}`}
-                    className="flex items-center gap-3 group"
+                    className="flex items-center gap-4 group"
                   >
-                    <span className="relative w-14 h-14 rounded-lg overflow-hidden shrink-0 bg-teal">
+                    <span className="relative w-28 h-28 rounded-lg overflow-hidden shrink-0 bg-teal">
                       {a.coverImage && (
                         <Image
                           src={a.coverImage}
@@ -221,7 +197,7 @@ export default function WorldMap({
                         />
                       )}
                       {a.contributorPhoto && (
-                        <span className="absolute bottom-1 right-1 w-5 h-5 rounded-full border-2 border-white overflow-hidden bg-white/90">
+                        <span className="absolute bottom-1.5 right-1.5 w-7 h-7 rounded-full border-2 border-white overflow-hidden bg-white/90">
                           <Image
                             src={a.contributorPhoto}
                             alt={a.contributorName ?? ""}

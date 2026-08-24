@@ -49,7 +49,7 @@ export default async function RootLayout({
         <Analytics />
         <Header authed={authed} />
         <main>{children}</main>
-        <Footer />
+        <Footer authed={authed} />
       </body>
     </html>
   );
