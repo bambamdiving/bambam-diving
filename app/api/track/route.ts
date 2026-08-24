@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   // Analytics not configured yet - fail silently so the site never breaks
-  // because of this. See /admin for setup instructions.
+  // because of this. See /reports for setup instructions.
   if (!url || !serviceKey) {
     return NextResponse.json({ ok: true, tracked: false });
   }
