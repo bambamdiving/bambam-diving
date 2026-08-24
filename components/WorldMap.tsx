@@ -42,8 +42,9 @@ export default function WorldMap({
   const dragStart = useRef<{ x: number; y: number } | null>(null);
   const hoverCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const displayedCountry = hovered ?? active;
+  const displayedCountry = active ?? hovered;
   const activePin = pins.find((p) => p.country === displayedCountry);
+  const isPinned = Boolean(active);
 
   function cancelHoverClose() {
     if (hoverCloseTimer.current) {
@@ -157,24 +158,28 @@ export default function WorldMap({
 
       {activePin && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-navy/70 px-5"
-          onClick={closePopup}
+          className={`fixed inset-0 z-50 flex items-center justify-center px-5 ${
+            isPinned ? "bg-navy/70" : "pointer-events-none"
+          }`}
+          onClick={isPinned ? closePopup : undefined}
         >
           <div
-            className="bg-white rounded-xl max-w-md w-full p-8 relative"
-            onClick={(e) => e.stopPropagation()}
-            onMouseEnter={cancelHoverClose}
-            onMouseLeave={scheduleHoverClose}
+            className={`bg-white rounded-xl max-w-md w-full p-8 relative ${
+              isPinned ? "" : "pointer-events-none"
+            }`}
+            onClick={isPinned ? (e) => e.stopPropagation() : undefined}
           >
-            <button
-              onClick={closePopup}
-              aria-label="Close"
-              className="absolute top-4 right-4 text-ink-dim hover:text-buoy transition-colors"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-                <path d="M6 6l12 12M18 6 6 18" strokeLinecap="round" />
-              </svg>
-            </button>
+            {isPinned && (
+              <button
+                onClick={closePopup}
+                aria-label="Close"
+                className="absolute top-4 right-4 text-ink-dim hover:text-buoy transition-colors"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+                  <path d="M6 6l12 12M18 6 6 18" strokeLinecap="round" />
+                </svg>
+              </button>
+            )}
 
             <p className="font-gauge text-[10px] tracking-[0.15em] uppercase text-buoy mb-4">
               {activePin.country}
