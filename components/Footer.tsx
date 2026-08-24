@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import { logout } from "@/app/reports/actions";
+import PadlockLightbox from "./PadlockLightbox";
 
 const PADLOCK_ICON = (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-6 h-6">
@@ -40,13 +40,7 @@ export default function Footer({ authed = false }: { authed?: boolean }) {
               </button>
             </form>
           ) : (
-            <Link
-              href="/reports"
-              aria-label="Reports (locked)"
-              className="hidden sm:inline-flex transition-opacity hover:opacity-80 text-red-500"
-            >
-              {PADLOCK_ICON}
-            </Link>
+            <PadlockLightbox />
           )}
         </div>
       </div>
