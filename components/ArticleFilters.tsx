@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { SearchableArticle } from "@/lib/articles";
 import ArticleCard from "./ArticleCard";
+import TagFilterLinks from "./TagFilterLinks";
 
 function SearchIcon() {
   return (
@@ -22,6 +23,11 @@ export default function ArticleFilters({ articles }: { articles: SearchableArtic
     searchParams.get("contributor")
   );
   const [tag, setTag] = useState<string | null>(searchParams.get("tag"));
+
+  useEffect(() => {
+    setContributor(searchParams.get("contributor"));
+    setTag(searchParams.get("tag"));
+  }, [searchParams]);
 
   const q = query.trim().toLowerCase();
 
@@ -101,6 +107,10 @@ export default function ArticleFilters({ articles }: { articles: SearchableArtic
           ))}
         </div>
       )}
+
+      <div className="flex justify-center mt-10">
+        <TagFilterLinks />
+      </div>
     </div>
   );
 }
