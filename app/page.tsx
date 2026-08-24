@@ -129,20 +129,22 @@ export default function Home() {
       </section>
 
       {/* Featured articles */}
-      <section className="mx-auto max-w-6xl px-5 sm:px-8 py-16 sm:py-20">
-        <p className="font-gauge text-buoy text-xs tracking-[0.2em] uppercase mb-3 text-center">
-          Fresh In
-        </p>
-        <h2 className="font-display text-3xl sm:text-4xl text-ink mb-8 text-center">
-          Featured Articles
-        </h2>
-        <div className="grid sm:grid-cols-2 gap-6">
-          {featuredArticles.map((article, i) => (
-            <ArticleCard key={article.slug} article={article} index={i} />
-          ))}
-        </div>
-        <div className="flex justify-center mt-8">
-          <TagFilterLinks />
+      <section className="bg-sky-100 py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-5 sm:px-8">
+          <p className="font-gauge text-buoy text-xs tracking-[0.2em] uppercase mb-3 text-center">
+            Fresh In
+          </p>
+          <h2 className="font-display text-3xl sm:text-4xl text-ink mb-8 text-center">
+            Featured Articles
+          </h2>
+          <div className="grid sm:grid-cols-2 gap-6">
+            {featuredArticles.map((article, i) => (
+              <ArticleCard key={article.slug} article={article} index={i} />
+            ))}
+          </div>
+          <div className="flex justify-center mt-8">
+            <TagFilterLinks />
+          </div>
         </div>
       </section>
 
