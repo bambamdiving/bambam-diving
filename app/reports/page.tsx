@@ -1,11 +1,11 @@
 import { cookies } from "next/headers";
 import { supabaseServer, isAnalyticsConfigured } from "@/lib/supabase";
 import { getAllArticles } from "@/lib/articles";
-import AdminLoginForm from "@/components/AdminLoginForm";
+import ReportsLoginForm from "@/components/ReportsLoginForm";
 import { logout } from "./actions";
 
 export const metadata = {
-  title: "Admin",
+  title: "Reports",
   robots: { index: false, follow: false },
 };
 
@@ -35,7 +35,7 @@ function tally(rows: EventRow[], type: string, key: "path" | "target") {
   return [...counts.entries()].sort((a, b) => b[1] - a[1]);
 }
 
-export default async function AdminPage({
+export default async function ReportsPage({
   searchParams,
 }: {
   searchParams: Promise<{ from?: string; to?: string }>;
@@ -48,7 +48,7 @@ export default async function AdminPage({
   if (!authed) {
     return (
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <AdminLoginForm />
+        <ReportsLoginForm />
       </div>
     );
   }
@@ -67,7 +67,7 @@ export default async function AdminPage({
     <div className="mx-auto max-w-4xl px-5 sm:px-8 py-16 sm:py-20">
       <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
         <h1 className="font-display text-3xl text-ink">
-          Analytics
+          Reports
         </h1>
         <form action={logout}>
           <button
@@ -109,7 +109,7 @@ export default async function AdminPage({
           Apply
         </button>
         {(from || to) && (
-          <a href="/admin" className="font-body text-sm text-ink-dim hover:text-buoy">
+          <a href="/reports" className="font-body text-sm text-ink-dim hover:text-buoy">
             Clear
           </a>
         )}

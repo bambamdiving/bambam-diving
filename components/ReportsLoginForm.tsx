@@ -2,9 +2,9 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { login } from "@/app/admin/actions";
+import { login } from "@/app/reports/actions";
 
-export default function AdminLoginForm() {
+export default function ReportsLoginForm() {
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();

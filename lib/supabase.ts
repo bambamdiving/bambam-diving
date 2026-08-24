@@ -9,7 +9,7 @@ export const supabaseBrowser =
   url && anonKey ? createClient(url, anonKey) : null;
 
 // Server-only instance with elevated privileges, used for reading aggregated
-// stats on the admin page. Never import this in a client component.
+// stats on the reports page. Never import this in a client component.
 export const supabaseServer =
   url && serviceKey ? createClient(url, serviceKey) : null;
 
