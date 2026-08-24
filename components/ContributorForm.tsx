@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const FORM_ENDPOINT = "https://formspree.io/f/xwlejdgk";
 
 const labelClass = "font-body text-sm font-medium text-ink-dim";
 const inputClass =
