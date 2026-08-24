@@ -16,7 +16,7 @@ export async function login(formData: FormData) {
       httpOnly: true,
       secure: true,
       sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 30, // 30 days
+      // No maxAge: session cookie, cleared when the browser closes.
     });
     return { error: null };
   }
