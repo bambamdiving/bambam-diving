@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import TermsModal from "./TermsModal";
 
 const FORM_ENDPOINT = "https://formspree.io/f/xwlejdgk";
 
@@ -36,6 +37,7 @@ export default function ContributorForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle"
   );
+  const [termsOpen, setTermsOpen] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -155,8 +157,22 @@ export default function ContributorForm() {
           required
           className="mt-1 accent-buoy"
         />
-        I have read and agree to the Terms and Conditions
+        <span>
+          I have read and agree to the{" "}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              setTermsOpen(true);
+            }}
+            className="text-teal hover:text-buoy underline transition-colors"
+          >
+            Terms and Conditions
+          </button>
+        </span>
       </label>
+
+      <TermsModal open={termsOpen} onClose={() => setTermsOpen(false)} />
 
       <button
         type="submit"
