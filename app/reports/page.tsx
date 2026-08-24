@@ -1,5 +1,5 @@
-import { cookies } from "next/headers";
 import { supabaseServer, isAnalyticsConfigured } from "@/lib/supabase";
+import { isAdminAuthed } from "@/lib/auth";
 import { getMetaStats, isFacebookConfigured, isInstagramConfigured } from "@/lib/meta";
 import { getAllArticles } from "@/lib/articles";
 import ReportsLoginForm from "@/components/ReportsLoginForm";
@@ -44,10 +44,7 @@ export default async function ReportsPage({
 }: {
   searchParams: Promise<{ from?: string; to?: string }>;
 }) {
-  const cookieStore = await cookies();
-  const authed =
-    cookieStore.get("bambam_admin")?.value === process.env.ADMIN_PASSWORD &&
-    Boolean(process.env.ADMIN_PASSWORD);
+  const authed = await isAdminAuthed();
 
   if (!authed) {
     return (

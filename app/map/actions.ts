@@ -2,14 +2,7 @@
 
 import { cookies } from "next/headers";
 import { supabaseServer } from "@/lib/supabase";
-
-async function isAuthed() {
-  const cookieStore = await cookies();
-  return (
-    cookieStore.get("bambam_admin")?.value === process.env.ADMIN_PASSWORD &&
-    Boolean(process.env.ADMIN_PASSWORD)
-  );
-}
+import { isAdminAuthed } from "@/lib/auth";
 
 export async function verifyPin(pin: string) {
   const correct = process.env.ADMIN_PASSWORD;
@@ -30,7 +23,7 @@ export async function verifyPin(pin: string) {
 }
 
 export async function savePinPosition(country: string, x: number, y: number) {
-  if (!(await isAuthed())) {
+  if (!(await isAdminAuthed())) {
     return { error: "Not authorized." };
   }
   if (!supabaseServer) {

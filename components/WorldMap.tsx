@@ -24,10 +24,12 @@ export default function WorldMap({
   pins,
   active,
   onActiveChange,
+  initialAuthed = false,
 }: {
   pins: MapPin[];
   active: string | null;
   onActiveChange: (country: string | null) => void;
+  initialAuthed?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [positions, setPositions] = useState<Record<string, { x: number; y: number }>>(
@@ -128,7 +130,15 @@ export default function WorldMap({
 
         <button
           type="button"
-          onClick={() => (editMode ? setEditMode(false) : setShowPinPrompt((v) => !v))}
+          onClick={() => {
+            if (editMode) {
+              setEditMode(false);
+            } else if (initialAuthed) {
+              setEditMode(true);
+            } else {
+              setShowPinPrompt((v) => !v);
+            }
+          }}
           aria-label={editMode ? "Done editing pin positions" : "Edit pin positions"}
           className="absolute top-3 right-3 flex items-center justify-center w-8 h-8 rounded-full bg-white/90 text-ink-dim hover:text-buoy shadow-sm transition-colors"
         >

@@ -6,13 +6,15 @@ import { usePathname } from "next/navigation";
 
 const SILVER = "#C8C9CC";
 
-const navLinks = [
+const baseNavLinks = [
   { href: "/", label: "Home", color: SILVER },
   { href: "/articles", label: "Articles", color: SILVER },
   { href: "/map", label: "Map", color: SILVER },
   { href: "/gallery", label: "Gallery", color: SILVER },
   { href: "/crew", label: "Us", color: SILVER },
 ];
+
+const reportsLink = { href: "/reports", label: "Reports", color: SILVER };
 
 const socialLinks = [
   {
@@ -49,8 +51,9 @@ const socialLinks = [
   },
 ];
 
-export default function Header() {
+export default function Header({ authed = false }: { authed?: boolean }) {
   const pathname = usePathname();
+  const navLinks = authed ? [...baseNavLinks, reportsLink] : baseNavLinks;
 
   return (
     <header className="sticky top-0 z-50 bg-navy border-b-4 border-buoy">

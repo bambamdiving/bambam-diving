@@ -9,9 +9,11 @@ const FALLBACK_COLOR = "#2F6778";
 export default function MapView({
   pins,
   tagCountries,
+  initialAuthed = false,
 }: {
   pins: MapPin[];
   tagCountries: string[];
+  initialAuthed?: boolean;
 }) {
   const [active, setActive] = useState<string | null>(null);
 
@@ -33,7 +35,7 @@ export default function MapView({
         })}
       </div>
 
-      <WorldMap pins={pins} active={active} onActiveChange={setActive} />
+      <WorldMap pins={pins} active={active} onActiveChange={setActive} initialAuthed={initialAuthed} />
     </>
   );
 }
