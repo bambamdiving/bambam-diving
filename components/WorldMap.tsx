@@ -12,6 +12,7 @@ export type MapPin = {
     slug: string;
     title: string;
     tags: string[];
+    coverImage?: string;
     contributorName?: string;
     contributorPhoto?: string;
   }[];
@@ -76,14 +77,24 @@ export default function WorldMap({
                     href={`/articles/${a.slug}`}
                     className="flex items-center gap-3 group"
                   >
-                    <span className="relative w-10 h-10 rounded-full overflow-hidden shrink-0 bg-teal">
-                      {a.contributorPhoto && (
+                    <span className="relative w-14 h-14 rounded-lg overflow-hidden shrink-0 bg-teal">
+                      {a.coverImage && (
                         <Image
-                          src={a.contributorPhoto}
-                          alt={a.contributorName ?? ""}
+                          src={a.coverImage}
+                          alt={a.title}
                           fill
                           className="object-cover"
                         />
+                      )}
+                      {a.contributorPhoto && (
+                        <span className="absolute bottom-1 right-1 w-5 h-5 rounded-full border-2 border-white overflow-hidden bg-white/90">
+                          <Image
+                            src={a.contributorPhoto}
+                            alt={a.contributorName ?? ""}
+                            fill
+                            className="object-cover"
+                          />
+                        </span>
                       )}
                     </span>
                     <span className="min-w-0">

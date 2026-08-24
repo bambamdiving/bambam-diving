@@ -13,7 +13,7 @@ const COUNTRY_COORDS: Record<string, { x: number; y: number }> = {
   Fiji: { x: 96, y: 75 },
   Mexico: { x: 18, y: 51 },
   "New Zealand": { x: 90.5, y: 88 },
-  Indonesia: { x: 74, y: 65 },
+  Indonesia: { x: 76, y: 67 },
   Dubai: { x: 56, y: 51 },
 };
 
@@ -32,6 +32,7 @@ export default function MapPage() {
             slug: a.slug,
             title: a.title,
             tags: a.tags ?? [],
+            coverImage: a.coverImage,
             contributorName: contributor?.name,
             contributorPhoto: contributor?.photo,
           };
