@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Analytics from "@/components/Analytics";
+import { isAdminAuthed } from "@/lib/auth";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -35,16 +36,18 @@ export const metadata: Metadata = {
     "Dive stories, dive sites, and the odd shark encounter, logged from around the world by BamBam Diving.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const authed = await isAdminAuthed();
+
   return (
     <html lang="en">
       <body
         className={`${fraunces.variable} ${inter.variable} ${jetbrains.variable} ${manrope.variable} antialiased`}
       >
         <Analytics />
-        <Header />
+        <Header authed={authed} />
         <main>{children}</main>
         <Footer />
       </body>

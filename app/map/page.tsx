@@ -3,6 +3,8 @@ import { type MapPin } from "@/components/WorldMap";
 import TagFilterLinks from "@/components/TagFilterLinks";
 import { getAllArticles } from "@/lib/articles";
 import { findContributor } from "@/lib/contributors";
+import { getPinOverrides } from "@/lib/mapPins";
+import { isAdminAuthed } from "@/lib/auth";
 
 export const metadata = {
   title: "Map | BamBam Diving",
@@ -17,15 +19,17 @@ const COUNTRY_COORDS: Record<string, { x: number; y: number }> = {
   Dubai: { x: 56, y: 51 },
 };
 
-export default function MapPage() {
+export default async function MapPage() {
   const articles = getAllArticles();
+  const overrides = await getPinOverrides();
+  const authed = await isAdminAuthed();
 
   const pins: MapPin[] = Object.entries(COUNTRY_COORDS)
     .map(([country, coords]) => {
       const matches = articles.filter((a) => a.location?.includes(country));
       return {
         country,
-        ...coords,
+        ...(overrides[country] ?? coords),
         articles: matches.map((a) => {
           const contributor = findContributor(a.contributor);
           return {
@@ -54,11 +58,10 @@ export default function MapPage() {
         see the articles. Everywhere else is still uncharted.
       </p>
 
-      <MapView pins={pins} tagCountries={pins.map((pin) => pin.country)} />
+      <MapView pins={pins} tagCountries={pins.map((pin) => pin.country)} initialAuthed={authed} />
 
       <p className="text-ink-dim text-sm mt-4 mb-8 text-center">
-        Pins are geo-located to the country, not the exact dive site &mdash; happy to make these
-        more precise once we&rsquo;re pinning real coordinates.
+        Pins are geo-located to the country, not the exact dive site.
       </p>
 
       <div className="flex justify-center">
