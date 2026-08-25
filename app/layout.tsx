@@ -31,7 +31,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "BamBam Diving | Real Stories From Underwater",
+  title: "BamBam Diving - The World's Best Dive Site",
   description:
     "Dive stories, dive sites, and the odd shark encounter, logged from around the world by BamBam Diving.",
 };
