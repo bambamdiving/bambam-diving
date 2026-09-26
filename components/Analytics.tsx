@@ -30,7 +30,7 @@ export default function Analytics() {
       const isOutbound = /^https?:\/\//.test(href) && !href.includes("bambamdiving.com");
       const isCta = el.dataset.track === "cta";
       if (isOutbound || isCta) {
-        track("click", pathname, href);
+        track("click", pathname, href.replace(/\/+$/, ""));
       }
     }
     document.addEventListener("click", handleClick);
