@@ -98,7 +98,7 @@ export default async function ArticlePage({
         )}
 
         <div
-          className="mt-10 font-body text-lg leading-relaxed text-ink-dim [&_h2]:font-modern [&_h2]:font-bold [&_h2]:text-ink [&_h2]:text-2xl [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:mb-5 [&_em]:text-ink-dim [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-5 [&_ul]:space-y-2 [&_strong]:text-ink [&_strong]:font-semibold"
+          className="mt-10 font-body text-lg leading-relaxed text-ink-dim [&_h2]:font-modern [&_h2]:font-bold [&_h2]:text-ink [&_h2]:text-2xl [&_h2]:mt-10 [&_h2]:mb-4 [&_p]:mb-5 [&_em]:text-ink-dim [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-5 [&_ul]:space-y-2 [&_strong]:text-ink [&_strong]:font-semibold [&_a]:text-teal [&_a]:underline [&_a]:underline-offset-2 [&_a]:font-medium [&_a:hover]:text-teal-deep"
           dangerouslySetInnerHTML={{ __html: contentHtml }}
         />
 
