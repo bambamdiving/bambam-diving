@@ -26,4 +26,4 @@ It's hard to describe the feeling of having that many sharks cruising past you a
 
 By the time we surfaced, the 3:30am alarm was long forgotten. Sharing a dive like that with my dad is something I'll hang onto for a long time, and I reckon he will too.
 
-If shark diving is on your list, Beqa Adventure Divers is the place to do it. The team clearly love what they do and care a lot about the sharks they dive with, and it shows in every part of the day. Their website, fijisharkdive.com, is well worth a look. It's easy to get around, full of useful info, and makes booking simple. Do yourself a favour and get it booked.
+If shark diving is on your list, Beqa Adventure Divers is the place to do it. The team clearly love what they do and care a lot about the sharks they dive with, and it shows in every part of the day. Their website, [fijisharkdive.com](https://www.fijisharkdive.com/), is well worth a look. It's easy to get around, full of useful info, and makes booking simple. Do yourself a favour and get it booked.
