@@ -32,8 +32,10 @@ function tally(rows: EventRow[], type: string, key: "path" | "target") {
   const counts = new Map<string, number>();
   for (const row of rows) {
     if (row.type !== type) continue;
-    const k = row[key];
-    if (!k) continue;
+    const raw = row[key];
+    if (!raw) continue;
+    // Collapse "https://example.com" and "https://example.com/" into one entry.
+    const k = key === "target" ? raw.replace(/\/+$/, "") : raw;
     counts.set(k, (counts.get(k) ?? 0) + 1);
   }
   return [...counts.entries()].sort((a, b) => b[1] - a[1]);
